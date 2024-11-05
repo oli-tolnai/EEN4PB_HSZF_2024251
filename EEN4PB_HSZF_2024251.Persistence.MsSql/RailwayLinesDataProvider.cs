@@ -46,13 +46,13 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
         public RailwayLinesDataProvider(RailwayLinesDbContext ctx)
         {
             this.ctx = ctx;
-            JsonDeserialize();
             JsonToDb(JsonDeserialize());
+
             //SeedDatabase();
         }
 
         //SeedDatabase method is used to fill the database with some initial data for testing purposes
-        private void SeedDatabase()
+        /*private void SeedDatabase()
         {
             var railwayLines = new List<RailwayLine>
             {
@@ -75,7 +75,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             railwayLines[0].Services.Add(services[1]);
             railwayLines[1].Services.Add(services[2]);
             ctx.SaveChanges();
-        }
+        }*/
 
         private List<RailwayLine> JsonDeserialize()
         {
