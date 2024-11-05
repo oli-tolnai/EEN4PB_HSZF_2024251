@@ -1,4 +1,5 @@
 ﻿using EEN4PB_HSZF_2024251.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,8 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
         public RailwayLinesDataProvider(RailwayLinesDbContext ctx)
         {
             this.ctx = ctx;
-            SeedDatabase();
+            JsonDeserialize();
+            //SeedDatabase();
         }
 
         //SeedDatabase method is used to fill the database with some initial data for testing purposes
@@ -72,6 +74,23 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             railwayLines[0].Services.Add(services[1]);
             railwayLines[1].Services.Add(services[2]);
             ctx.SaveChanges();
+        }
+
+        private void JsonDeserialize()
+        {
+            //List<RailwayLine> railwayLines = JsonConvert.DeserializeObject<List<RailwayLine>>(File.ReadAllText("railwayLines.json"));
+
+            //var railwayLines = JsonConvert.DeserializeObject<List<RailwayDataJson>>(File.ReadAllText("railwayLines.json"));
+
+            string jsonString = File.ReadAllText("railwayLines.json");
+            Console.WriteLine(jsonString);
+
+            RailwayData railwayData = JsonConvert.DeserializeObject<RailwayData>(jsonString);
+
+
+
+
+            ;
         }
     }
 }

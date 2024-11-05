@@ -20,7 +20,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
         //Constructor, which is used to delete and create the database
         public RailwayLinesDbContext()
         {
-            //this.Database.EnsureDeleted();
+            this.Database.EnsureDeleted();
             this.Database.EnsureCreated();
         }
 
