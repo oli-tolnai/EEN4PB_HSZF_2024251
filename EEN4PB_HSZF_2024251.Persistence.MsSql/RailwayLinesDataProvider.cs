@@ -47,6 +47,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
         {
             this.ctx = ctx;
             JsonDeserialize();
+            JsonToDb(JsonDeserialize());
             //SeedDatabase();
         }
 
@@ -76,20 +77,32 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             ctx.SaveChanges();
         }
 
-        private void JsonDeserialize()
+        private List<RailwayLine> JsonDeserialize()
         {
-            //List<RailwayLine> railwayLines = JsonConvert.DeserializeObject<List<RailwayLine>>(File.ReadAllText("railwayLines.json"));
-
-            //var railwayLines = JsonConvert.DeserializeObject<List<RailwayDataJson>>(File.ReadAllText("railwayLines.json"));
-
+            
             string jsonString = File.ReadAllText("railwayLines.json");
             Console.WriteLine(jsonString);
 
             RailwayData railwayData = JsonConvert.DeserializeObject<RailwayData>(jsonString);
+            
 
+            return railwayData.RailwayLines;
 
+            ;
+        }
 
-
+        private void JsonToDb(List<RailwayLine> railwayLines)
+        {
+            
+            foreach (var railwayLine in railwayLines)
+            {
+                ctx.RailwayLines.Add(railwayLine);
+                foreach (var service in railwayLine.Services)
+                {
+                    ctx.Services.Add(service);
+                }
+            }
+            ctx.SaveChanges();
             ;
         }
     }
