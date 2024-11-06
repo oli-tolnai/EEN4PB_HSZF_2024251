@@ -6,7 +6,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 {
     public class RailwayLinesDbContext : DbContext
     {
-        //Write things to the console
+        //This is used to log the SQL commands to the console
         public static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder =>
         {
             builder.AddConsole();

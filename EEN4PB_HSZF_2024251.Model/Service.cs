@@ -29,15 +29,27 @@ namespace EEN4PB_HSZF_2024251.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
 
+        [Required]
+        [StringLength(100)]
         public string From { get; set; }
 
+        [Required]
+        [StringLength(100)]
         public string To { get; set; }
 
+        [Required]
+        [StringLength(100)]
         public int TrainNumber { get; set; }
 
         public int DelayAmount { get; set; }
 
+        [Required]
+        [StringLength(100)]
         public string TrainType { get; set; }
+
+        //[ForeignKey("RailwayLineId")]
+        [ForeignKey("JaniId")]
+        public string RailwayLineId { get; set; }
 
     }
 }

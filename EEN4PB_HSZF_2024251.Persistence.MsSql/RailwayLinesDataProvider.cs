@@ -18,6 +18,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         List<Service> GetServices();
 
+
         //RailwayLine CRUD operations
         void CreateRailwayLine(RailwayLine railwayLine);
 
@@ -77,6 +78,8 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             ctx.SaveChanges();
         }*/
 
+
+        //JsonDeserialize method is used to deserialize the JSON data
         private List<RailwayLine> JsonDeserialize()
         {
             
@@ -87,13 +90,12 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             
 
             return railwayData.RailwayLines;
-
-            ;
+                
         }
 
+        //JsonToDb method is used to convert the deserialized JSON data to database entities
         private void JsonToDb(List<RailwayLine> railwayLines)
-        {
-            
+        {            
             foreach (var railwayLine in railwayLines)
             {
                 ctx.RailwayLines.Add(railwayLine);
