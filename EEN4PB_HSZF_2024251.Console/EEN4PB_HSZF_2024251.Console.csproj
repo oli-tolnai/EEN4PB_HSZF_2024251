@@ -8,6 +8,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\EEN4PB_HSZF_2024251.Application\EEN4PB_HSZF_2024251.Application.csproj" />
 		<ProjectReference Include="..\EEN4PB_HSZF_2024251.Model\EEN4PB_HSZF_2024251.Model.csproj" />
 		<ProjectReference Include="..\EEN4PB_HSZF_2024251.Persistence.MsSql\EEN4PB_HSZF_2024251.Persistence.MsSql.csproj" />

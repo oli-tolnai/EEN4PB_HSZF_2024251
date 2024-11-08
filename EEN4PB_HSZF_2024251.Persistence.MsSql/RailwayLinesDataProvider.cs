@@ -11,7 +11,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 {
     public interface IRailwayLinesDataProvider
     {
-        RailwayLine GetRailwayLineById(int id);
+        RailwayLine GetRailwayLineById(string id);
 
         List<RailwayLine> GetRailwayLines();
 
@@ -22,11 +22,11 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         void UpdateRailwayLine(RailwayLine railwayLine);
 
-        void DeleteRailwayLine(int id);
+        void DeleteRailwayLine(string id);
 
     }
 
-    public class RailwayLinesDataProvider
+    public class RailwayLinesDataProvider : IRailwayLinesDataProvider
     {
         private readonly RailwayLinesDbContext ctx;
 
@@ -43,8 +43,43 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             //SeedDatabase();
         }
 
+        public void CreateRailwayLine(RailwayLine railwayLine)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteRailwayLine(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public RailwayLine GetRailwayLineById(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<RailwayLine> GetRailwayLines()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<RailwayLine> ReadAllRailwayLines()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateRailwayLine(RailwayLine railwayLine)
+        {
+            throw new NotImplementedException();
+        }
+        
+
+
+
+
+        /*
         //SeedDatabase method is used to fill the database with some initial data for testing purposes
-        /*private void SeedDatabase()
+        private void SeedDatabase()
         {
             var railwayLines = new List<RailwayLine>
             {

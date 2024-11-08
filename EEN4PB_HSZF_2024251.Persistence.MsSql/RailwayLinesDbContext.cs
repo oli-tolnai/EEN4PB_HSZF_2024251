@@ -32,5 +32,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
                 .UseLoggerFactory(MyLoggerFactory)
                 .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=RailwayLineDb;Trusted_Connection=True;TrustServerCertificate=True");
         }
+
+        
     }
 }
