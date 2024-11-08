@@ -8,6 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="ConsoleMenu-simple" Version="2.7.0" />
 	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
 	</ItemGroup>
 

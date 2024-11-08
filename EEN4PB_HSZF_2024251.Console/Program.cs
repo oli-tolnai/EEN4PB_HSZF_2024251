@@ -2,9 +2,12 @@
 using EEN4PB_HSZF_2024251.Application;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using ConsoleTools;
+using System.IO;
+using System;
 namespace EEN4PB_HSZF_2024251
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -27,7 +30,7 @@ namespace EEN4PB_HSZF_2024251
 
 
 
-            
+
             /*
             var host = Host.CreateDefaultBuilder()
                 .ConfigureServices((hostContext, services) =>
@@ -55,9 +58,32 @@ namespace EEN4PB_HSZF_2024251
 
 
 
+            /*ConsoleMenu Try
+            new ConsoleMenu()
+                .Add("Add new Railway Line", () => SomeAction("One"))
+                .Add("Add new Service", () => SomeAction("Two"))
+                .Add("Close", () => OtherAction())
+                .Configure(config => { config.Selector = "--> "; })
+                .Show();*/
 
 
             ;
         }
+
+        /* ConsoleMenu try
+        public static void SomeAction(string action)
+        {
+            new ConsoleMenu()
+                .Add("Halicsihi", () => SomeAction("One"))
+                .Add("Add new Service", () => SomeAction("Two"))
+                .Add("Close", () => OtherAction())
+                .Configure(config => { config.Selector = "--> "; })
+                .Show();
+        }
+
+        public static void OtherAction()
+        {
+            System.Environment.Exit(-1);
+        }*/
     }
 }
