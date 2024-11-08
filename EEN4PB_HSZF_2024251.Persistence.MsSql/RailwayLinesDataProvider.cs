@@ -1,4 +1,5 @@
 ﻿using EEN4PB_HSZF_2024251.Model;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,6 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         List<RailwayLine> GetRailwayLines();
 
-        Service GetServiceById(int id);
-
-        List<Service> GetServices();
-
-
         //RailwayLine CRUD operations
         void CreateRailwayLine(RailwayLine railwayLine);
 
@@ -28,26 +24,21 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         void DeleteRailwayLine(int id);
 
-
-        //Service CRUD operations
-        void CreateService(Service service);
-
-        IEnumerable<Service> ReadAllServices();
-
-        void UpdateService(Service service);
-
-        void DeleteService(int id);
-
     }
 
     public class RailwayLinesDataProvider
     {
-        RailwayLinesDbContext ctx;
+        private readonly RailwayLinesDbContext ctx;
 
-        public RailwayLinesDataProvider(RailwayLinesDbContext ctx)
+        public IJsonImportToDb jsonImportToDb = new JsonImportToDb();
+        
+
+        public RailwayLinesDataProvider(string path, RailwayLinesDbContext ctx)
         {
             this.ctx = ctx;
-            JsonToDb(JsonDeserialize());
+            jsonImportToDb!.JsonIntoDb(path, ctx);
+            
+            //JsonToDb(JsonDeserialize("railwayLines3.json"));
 
             //SeedDatabase();
         }
@@ -78,12 +69,12 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             ctx.SaveChanges();
         }*/
 
-
+        /*
         //JsonDeserialize method is used to deserialize the JSON data
-        private List<RailwayLine> JsonDeserialize()
+        private List<RailwayLine> JsonDeserialize(string path)
         {
             
-            string jsonString = File.ReadAllText("railwayLines.json");
+            string jsonString = File.ReadAllText(path);
             Console.WriteLine(jsonString);
 
             RailwayData railwayData = JsonConvert.DeserializeObject<RailwayData>(jsonString);
@@ -106,6 +97,6 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             }
             ctx.SaveChanges();
             ;
-        }
+        }*/
     }
 }

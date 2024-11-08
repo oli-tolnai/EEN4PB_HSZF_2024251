@@ -8,8 +8,8 @@ namespace EEN4PB_HSZF_2024251
         {
             
             var ctx = new RailwayLinesDbContext();
-            var dataProvider = new RailwayLinesDataProvider(ctx);
-
+            var RdataProvider = new RailwayLinesDataProvider("railwayLines3.json", ctx);
+            
             //var railwayLines = ctx.RailwayLines.ToList();
             //var services = ctx.Services.ToList();
 
