@@ -5,15 +5,22 @@ using Microsoft.Extensions.DependencyInjection;
 using ConsoleTools;
 using System.IO;
 using System;
+using EEN4PB_HSZF_2024251.Model;
 namespace EEN4PB_HSZF_2024251
 {
     public class Program
     {
+        static string PathInput()
+        {
+            System.Console.Write("Please enter the path of the JSON file: ");
+            return System.Console.ReadLine();
+        }
+
         static void Main(string[] args)
         {
-            
+            /*
             var ctx = new RailwayLinesDbContext();
-            var RdataProvider = new RailwayLinesDataProvider("railwayLines3.json", ctx);
+            var RdataProvider = new RailwayLinesDataProvider(PathInput(), ctx);
 
             var servicesDataProvider = new ServicesDataProvider(ctx);
             var q1 = servicesDataProvider.GetServices();
@@ -21,69 +28,44 @@ namespace EEN4PB_HSZF_2024251
             var q2 = servicesDataProvider.GetServiceById(id);
             var q3 = servicesDataProvider.GetRailwayLineServices("120A", "BP-Keleti->Szolnoks");
 
-
-            //var railwayLines = ctx.RailwayLines.ToList();
-            //var services = ctx.Services.ToList();
-
-            //var q1 = from x in railwayLines
-            //         select x.Services
+            */
+            
 
 
-
-
-            /*
+            
             var host = Host.CreateDefaultBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    //TODO: Add services here
-
                     services.AddScoped<RailwayLinesDbContext>();
-                    services.AddSingleton<IRailwayLinesDataProvider, RailwayLinesDataProvider>();
-                    services.AddSingleton<IRailwayLinesLogic, RailwayLinesLogic>();
-
-                    services.AddSingleton<IServicesDataProvider, ServicesDataProvider>(); 
+                    services.AddSingleton<IRailwayLinesDataProvider>(provider =>
+                new RailwayLinesDataProvider(PathInput(), provider.GetRequiredService<RailwayLinesDbContext>()));
+                    services.AddSingleton<IServicesDataProvider, ServicesDataProvider>();
 
                 })
                 .Build();
             host.Start();
 
-            //Call RailwayLinesLogic
+            using IServiceScope serviceScope = host.Services.CreateScope();
 
-            using IServiceScope scope = host.Services.CreateScope();
+            
+            IRailwayLinesDataProvider provider = host.Services.GetRequiredService<IRailwayLinesDataProvider>();
 
-            var railwayLinesLogic = host.Services.GetRequiredService<IRailwayLinesLogic>();
+            IServicesDataProvider serviceProvider = host.Services.GetRequiredService<IServicesDataProvider>();
 
-            var railwayLine = railwayLinesLogic.GetRailwayLineById("");
-            */
+            List<RailwayLine> q11 = provider.GetRailwayLines();
+
+            var q1 = serviceProvider.GetServices();
+            var id = q1[1].Id;
+            var q2 = serviceProvider.GetServiceById(id);
+            var q3 = serviceProvider.GetRailwayLineServices("120A", "BP-Keleti->Szolnok");
 
 
 
-            /*ConsoleMenu Try
-            new ConsoleMenu()
-                .Add("Add new Railway Line", () => SomeAction("One"))
-                .Add("Add new Service", () => SomeAction("Two"))
-                .Add("Close", () => OtherAction())
-                .Configure(config => { config.Selector = "--> "; })
-                .Show();*/
+
+
 
 
             ;
         }
-
-        /* ConsoleMenu try
-        public static void SomeAction(string action)
-        {
-            new ConsoleMenu()
-                .Add("Halicsihi", () => SomeAction("One"))
-                .Add("Add new Service", () => SomeAction("Two"))
-                .Add("Close", () => OtherAction())
-                .Configure(config => { config.Selector = "--> "; })
-                .Show();
-        }
-
-        public static void OtherAction()
-        {
-            System.Environment.Exit(-1);
-        }*/
     }
 }

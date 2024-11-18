@@ -55,12 +55,12 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         public RailwayLine GetRailwayLineById(string id)
         {
-            throw new NotImplementedException();
+            return ctx.RailwayLines.FirstOrDefault(x => x.Id == id);
         }
 
         public List<RailwayLine> GetRailwayLines()
         {
-            throw new NotImplementedException();
+            return ctx.RailwayLines.ToList();
         }
 
         public IEnumerable<RailwayLine> ReadAllRailwayLines()

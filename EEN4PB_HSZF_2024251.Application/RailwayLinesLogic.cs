@@ -27,7 +27,7 @@ namespace EEN4PB_HSZF_2024251.Application
 
         public List<RailwayLine> GetRailwayLines()
         {
-            throw new NotImplementedException();
+            return railwayLinesDataProvider.GetRailwayLines();
         }
     }
 }

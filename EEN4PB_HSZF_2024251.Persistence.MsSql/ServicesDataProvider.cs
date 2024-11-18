@@ -20,7 +20,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         IEnumerable<Service> ReadAllServices();
 
-        void UpdateService(Service service);
+        void UpdateService(string id, Service service);
 
         void DeleteService(string id);
 
@@ -75,12 +75,35 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         public IEnumerable<Service> ReadAllServices()
         {
-            throw new NotImplementedException();
+            return ctx.Services.ToList();
         }
 
-        public void UpdateService(Service service)
+        public void UpdateService(string id, Service service)
         {
-            throw new NotImplementedException();
+            //update service
+            var s = GetServiceById(id);
+            if (service.From != null)
+            {
+                s.From = service.From;
+            }
+            if (service.To != null)
+            {
+                s.To = service.To;
+            }
+            if ((service.DelayAmount).GetType() == typeof(int))
+            {
+                s.DelayAmount = service.DelayAmount;
+            }
+            if (service.TrainNumber != 0)
+            {
+                s.TrainNumber = service.TrainNumber;
+            }
+            if (service.TrainType != null)
+            {
+                s.TrainType = service.TrainType;
+            }
+            ctx.SaveChanges();
+
         }
     }
 }
