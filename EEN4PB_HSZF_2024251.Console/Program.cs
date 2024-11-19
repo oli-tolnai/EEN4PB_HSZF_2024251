@@ -37,8 +37,7 @@ namespace EEN4PB_HSZF_2024251
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddScoped<RailwayLinesDbContext>();
-                    services.AddSingleton<IRailwayLinesDataProvider>(provider =>
-                new RailwayLinesDataProvider(PathInput(), provider.GetRequiredService<RailwayLinesDbContext>()));
+                    services.AddSingleton<IRailwayLinesDataProvider>(provider => new RailwayLinesDataProvider(PathInput(), provider.GetRequiredService<RailwayLinesDbContext>()));
                     services.AddSingleton<IServicesDataProvider, ServicesDataProvider>();
 
                 })
@@ -48,21 +47,21 @@ namespace EEN4PB_HSZF_2024251
             using IServiceScope serviceScope = host.Services.CreateScope();
 
             
-            IRailwayLinesDataProvider provider = host.Services.GetRequiredService<IRailwayLinesDataProvider>();
+            IRailwayLinesDataProvider railwayProvider = host.Services.GetRequiredService<IRailwayLinesDataProvider>();
 
             IServicesDataProvider serviceProvider = host.Services.GetRequiredService<IServicesDataProvider>();
 
-            List<RailwayLine> q11 = provider.GetRailwayLines();
+            List<RailwayLine> q11 = railwayProvider.GetRailwayLines();
 
             var q1 = serviceProvider.GetServices();
             var id = q1[1].Id;
             var q2 = serviceProvider.GetServiceById(id);
             var q3 = serviceProvider.GetRailwayLineServices("120A", "BP-Keleti->Szolnok");
 
+            ;
+            railwayProvider.UpdateDatabase(PathInput());
 
-
-
-
+            var q4 = serviceProvider.GetRailwayLineServices("120A", "BP-Keleti->Szolnok");
 
 
             ;
