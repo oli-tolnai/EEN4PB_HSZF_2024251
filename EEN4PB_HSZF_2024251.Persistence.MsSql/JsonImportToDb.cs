@@ -16,7 +16,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
         void JsonToDb(List<RailwayLine> railwayLines);*/
 
         void JsonIntoDb(string path, RailwayLinesDbContext ctx);
-        public void JsonIntoDbUpdate(string path, RailwayLinesDbContext ctx);
+        public void NewJsonIntoDb(string path, RailwayLinesDbContext ctx);
     }
 
     public class JsonImportToDb  : IJsonImportToDb
@@ -49,7 +49,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
         }
 
         //Import another JSON file to the database, if it contains the same RailwayLine which means the LineNumber and the LineName are the same, then only add the NEW services to the existing RailwayLine. Servicies are equal if the TrainNumber, From, To, DelayAmount and TrainType are the same. If the railwayline new then add the whole railwayline and its services to the database
-        public void JsonIntoDbUpdate(string path, RailwayLinesDbContext ctx)
+        public void NewJsonIntoDb(string path, RailwayLinesDbContext ctx)
         {
             string jsonString = File.ReadAllText(path);
             Console.WriteLine(jsonString);

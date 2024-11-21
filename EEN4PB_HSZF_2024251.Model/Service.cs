@@ -47,8 +47,7 @@ namespace EEN4PB_HSZF_2024251.Model
         [StringLength(100)]
         public string TrainType { get; set; }
 
-        //[ForeignKey("RailwayLineId")]
-        [ForeignKey("JaniId")]
+        [ForeignKey("RailwayLineId")]
         public string RailwayLineId { get; set; }
 
     }

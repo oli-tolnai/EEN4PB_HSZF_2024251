@@ -6,16 +6,12 @@ using ConsoleTools;
 using System.IO;
 using System;
 using EEN4PB_HSZF_2024251.Model;
+using EEN4PB_HSZF_2024251.Console;
+
 namespace EEN4PB_HSZF_2024251
 {
     public class Program
     {
-        static string PathInput()
-        {
-            System.Console.Write("Please enter the path of the JSON file: ");
-            return System.Console.ReadLine();
-        }
-
         static void Main(string[] args)
         {
             /*
@@ -29,15 +25,17 @@ namespace EEN4PB_HSZF_2024251
             var q3 = servicesDataProvider.GetRailwayLineServices("120A", "BP-Keleti->Szolnoks");
 
             */
+
             
 
 
-            
             var host = Host.CreateDefaultBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddScoped<RailwayLinesDbContext>();
-                    services.AddSingleton<IRailwayLinesDataProvider>(provider => new RailwayLinesDataProvider(PathInput(), provider.GetRequiredService<RailwayLinesDbContext>()));
+                    services.AddSingleton<IRailwayLinesDataProvider>(provider => new RailwayLinesDataProvider(Menu.FirstMenu(), provider.GetRequiredService<RailwayLinesDbContext>()));
+                    services.AddSingleton<IRailwayLinesLogic, RailwayLinesLogic>();
+
                     services.AddSingleton<IServicesDataProvider, ServicesDataProvider>();
 
                 })
@@ -47,22 +45,32 @@ namespace EEN4PB_HSZF_2024251
             using IServiceScope serviceScope = host.Services.CreateScope();
 
             
-            IRailwayLinesDataProvider railwayProvider = host.Services.GetRequiredService<IRailwayLinesDataProvider>();
+            //IRailwayLinesDataProvider railwayProvider = host.Services.GetRequiredService<IRailwayLinesDataProvider>();
 
-            IServicesDataProvider serviceProvider = host.Services.GetRequiredService<IServicesDataProvider>();
+            IRailwayLinesLogic railwayLogic = host.Services.GetRequiredService<IRailwayLinesLogic>();
 
-            List<RailwayLine> q11 = railwayProvider.GetRailwayLines();
+            //IServicesDataProvider serviceProvider = host.Services.GetRequiredService<IServicesDataProvider>();
 
+            //List<RailwayLine> q11 = railwayLogic.GetRailwayLines();
+
+
+
+            Menu.MainMenu(railwayLogic);
+
+
+
+
+            /*
             var q1 = serviceProvider.GetServices();
             var id = q1[1].Id;
             var q2 = serviceProvider.GetServiceById(id);
             var q3 = serviceProvider.GetRailwayLineServices("120A", "BP-Keleti->Szolnok");
 
             ;
-            railwayProvider.UpdateDatabase(PathInput());
+            railwayProvider.UpdateDatabase(Menu.PathInput());
 
             var q4 = serviceProvider.GetRailwayLineServices("120A", "BP-Keleti->Szolnok");
-
+            */
 
             ;
         }

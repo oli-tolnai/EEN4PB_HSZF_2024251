@@ -74,7 +74,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         public void UpdateDatabase(string path)
         {
-            jsonImportToDb!.JsonIntoDbUpdate(path, ctx);
+            jsonImportToDb!.NewJsonIntoDb(path, ctx);
         }
 
 

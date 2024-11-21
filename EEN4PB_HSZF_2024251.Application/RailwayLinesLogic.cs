@@ -9,25 +9,34 @@ namespace EEN4PB_HSZF_2024251.Application
 
         List<RailwayLine> GetRailwayLines();
 
+        public void UpdateDatabase(string path);
+
+
     }
 
     public class RailwayLinesLogic : IRailwayLinesLogic
     {
-        private readonly IRailwayLinesDataProvider railwayLinesDataProvider;
+        private readonly IRailwayLinesDataProvider provider;
 
         public RailwayLinesLogic(IRailwayLinesDataProvider railwayLinesDataProvider)
         {
-            this.railwayLinesDataProvider = railwayLinesDataProvider;
+            this.provider = railwayLinesDataProvider;
         }
+
 
         public RailwayLine GetRailwayLineById(string id)
         {
-            return railwayLinesDataProvider.GetRailwayLineById(id);
+            return provider.GetRailwayLineById(id);
         }
 
         public List<RailwayLine> GetRailwayLines()
         {
-            return railwayLinesDataProvider.GetRailwayLines();
+            return provider.GetRailwayLines();
+        }
+
+        public void UpdateDatabase(string path)
+        {
+            provider.UpdateDatabase(path);
         }
     }
 }
