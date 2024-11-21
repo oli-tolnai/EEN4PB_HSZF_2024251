@@ -1,0 +1,37 @@
+{
+    "RailwayLines": [
+        {
+            "LineNumber": "120A",
+            "LineName": "BP-Keleti->Szolnok",
+            "Services": [
+                {
+                    "From": "Szolnok",
+                    "To": "Budapest-Keleti",
+                    "TrainNumber": 3320,
+                    "DelayAmount": 3,
+                    "TrainType": "InterCity"
+                },
+                {
+                    "From": "Budapest-Keleti",
+                    "To": "Sülysáp",
+                    "DelayAmount": 10,
+                    "TrainType": "Passenger",
+                    "TrainNumber": 3210
+                }
+            ]
+        },
+        {
+            "LineName": "BP-Nyugati->Szolnok",
+            "LineNumber": "100A",
+            "Services": [
+                {
+                    "From": "BP-Nyugati",
+                    "To": "Cegléd",
+                    "TrainNumber": 4320,
+                    "DelayAmount": 25,
+                    "TrainType": "Passenger"
+                }
+            ]
+        }
+    ]
+}

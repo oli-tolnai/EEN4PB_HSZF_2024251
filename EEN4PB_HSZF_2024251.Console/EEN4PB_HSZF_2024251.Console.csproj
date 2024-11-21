@@ -8,6 +8,28 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="JSON_files\data1.json" />
+	  <None Remove="JSON_files\data2.json" />
+	  <None Remove="JSON_files\data3.json" />
+	  <None Remove="JSON_files\data4.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="JSON_files\data1.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="JSON_files\data2.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="JSON_files\data3.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="JSON_files\data4.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="ConsoleMenu-simple" Version="2.7.0" />
 	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
 	</ItemGroup>

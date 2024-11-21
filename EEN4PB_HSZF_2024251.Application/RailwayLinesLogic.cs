@@ -10,7 +10,7 @@ namespace EEN4PB_HSZF_2024251.Application
 
         List<RailwayLine> GetRailwayLines();*/
 
-        public void UpdateDatabase(string path);
+        public void FillDatabaseWithNewData(string path);
 
 
     }
@@ -24,9 +24,9 @@ namespace EEN4PB_HSZF_2024251.Application
             this.provider = railwayLinesDataProvider;
         }
 
-        public void UpdateDatabase(string path)
+        public void FillDatabaseWithNewData(string path)
         {
-            provider.UpdateDatabase(path);
+            provider.FillDatabaseWithNewData(path);
         }
     }
 }

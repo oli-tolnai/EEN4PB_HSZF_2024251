@@ -1,0 +1,179 @@
+{
+    "RailwayLines": [
+        {
+            "LineNumber": "120A",
+            "LineName": "BP-Keleti->Szolnok",
+            "Services": [
+                {
+                    "From": "Szolnok",
+                    "To": "Budapest-Keleti",
+                    "TrainNumber": 3320,
+                    "DelayAmount": 3,
+                    "TrainType": "InterCity"
+                },
+                {
+                    "From": "Budapest-Keleti",
+                    "To": "Sülysáp",
+                    "DelayAmount": 10,
+                    "TrainType": "Passenger",
+                    "TrainNumber": 3210
+                },
+                {
+                    "From": "Budapest-Keleti",
+                    "To": "Nagykáta",
+                    "TrainNumber": 3340,
+                    "DelayAmount": 5,
+                    "TrainType": "Passenger"
+                },
+                {
+                    "From": "Nagykáta",
+                    "To": "Szolnok",
+                    "TrainNumber": 3350,
+                    "DelayAmount": 0,
+                    "TrainType": "Express"
+                }
+            ]
+        },
+        {
+            "LineName": "BP-Nyugati->Szolnok",
+            "LineNumber": "100A",
+            "Services": [
+                {
+                    "From": "BP-Nyugati",
+                    "To": "Cegléd",
+                    "TrainNumber": 4320,
+                    "DelayAmount": 25,
+                    "TrainType": "Passenger"
+                },
+                {
+                    "From": "BP-Nyugati",
+                    "To": "Monor",
+                    "TrainNumber": 4315,
+                    "DelayAmount": 8,
+                    "TrainType": "Passenger"
+                },
+                {
+                    "From": "Monor",
+                    "To": "Cegléd",
+                    "TrainNumber": 4330,
+                    "DelayAmount": 4,
+                    "TrainType": "InterCity"
+                }
+            ]
+        },
+        {
+            "LineName": "Szolnok->Debrecen",
+            "LineNumber": "100B",
+            "Services": [
+                {
+                    "From": "Szolnok",
+                    "To": "Debrecen",
+                    "TrainNumber": 5400,
+                    "DelayAmount": 0,
+                    "TrainType": "InterCity"
+                },
+                {
+                    "From": "Debrecen",
+                    "To": "Szolnok",
+                    "TrainNumber": 5401,
+                    "DelayAmount": 2,
+                    "TrainType": "InterCity"
+                },
+                {
+                    "From": "Szolnok",
+                    "To": "Hajdúszoboszló",
+                    "TrainNumber": 5410,
+                    "DelayAmount": 1,
+                    "TrainType": "Passenger"
+                }
+            ]
+        },
+        {
+            "LineName": "BP-Déli->Győr",
+            "LineNumber": "1",
+            "Services": [
+                {
+                    "From": "BP-Déli",
+                    "To": "Tatabánya",
+                    "TrainNumber": 2410,
+                    "DelayAmount": 12,
+                    "TrainType": "Express"
+                },
+                {
+                    "From": "Tatabánya",
+                    "To": "Győr",
+                    "TrainNumber": 2411,
+                    "DelayAmount": 0,
+                    "TrainType": "Express"
+                },
+                {
+                    "From": "Győr",
+                    "To": "Hegyeshalom",
+                    "TrainNumber": 2420,
+                    "DelayAmount": 15,
+                    "TrainType": "InterCity"
+                }
+            ]
+        },
+        {
+            "LineName": "Miskolc->Sátoraljaújhely",
+            "LineNumber": "90A",
+            "Services": [
+                {
+                    "From": "Miskolc",
+                    "To": "Szerencs",
+                    "TrainNumber": 6100,
+                    "DelayAmount": 3,
+                    "TrainType": "Passenger"
+                },
+                {
+                    "From": "Szerencs",
+                    "To": "Sátoraljaújhely",
+                    "TrainNumber": 6101,
+                    "DelayAmount": 7,
+                    "TrainType": "Passenger"
+                }
+            ]
+        },
+        {
+            "LineName": "Pécs->Siófok",
+            "LineNumber": "40",
+            "Services": [
+                {
+                    "From": "Pécs",
+                    "To": "Dombóvár",
+                    "TrainNumber": 5200,
+                    "DelayAmount": 5,
+                    "TrainType": "Passenger"
+                },
+                {
+                    "From": "Dombóvár",
+                    "To": "Siófok",
+                    "TrainNumber": 5201,
+                    "DelayAmount": 10,
+                    "TrainType": "Passenger"
+                }
+            ]
+        },
+        {
+            "LineName": "Szeged->Kecskemét",
+            "LineNumber": "140A",
+            "Services": [
+                {
+                    "From": "Szeged",
+                    "To": "Kiskunfélegyháza",
+                    "TrainNumber": 7200,
+                    "DelayAmount": 4,
+                    "TrainType": "Passenger"
+                },
+                {
+                    "From": "Kiskunfélegyháza",
+                    "To": "Kecskemét",
+                    "TrainNumber": 7201,
+                    "DelayAmount": 6,
+                    "TrainType": "Passenger"
+                }
+            ]
+        }
+    ]
+}

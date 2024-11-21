@@ -33,7 +33,8 @@ namespace EEN4PB_HSZF_2024251
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddScoped<RailwayLinesDbContext>();
-                    services.AddSingleton<IRailwayLinesDataProvider>(provider => new RailwayLinesDataProvider(Menu.FirstMenu(), provider.GetRequiredService<RailwayLinesDbContext>()));
+                    services.AddSingleton<IRailwayLinesDataProvider, RailwayLinesDataProvider>();
+                    //services.AddSingleton<IRailwayLinesDataProvider>(provider => new RailwayLinesDataProvider(Menu.FirstMenu(), provider.GetRequiredService<RailwayLinesDbContext>()));
                     services.AddSingleton<IRailwayLinesLogic, RailwayLinesLogic>();
 
                     services.AddSingleton<IServicesDataProvider, ServicesDataProvider>();
@@ -53,7 +54,7 @@ namespace EEN4PB_HSZF_2024251
 
             //List<RailwayLine> q11 = railwayLogic.GetRailwayLines();
 
-
+            railwayLogic.FillDatabaseWithNewData(Menu.FirstMenu());
 
             Menu.MainMenu(railwayLogic);
 
