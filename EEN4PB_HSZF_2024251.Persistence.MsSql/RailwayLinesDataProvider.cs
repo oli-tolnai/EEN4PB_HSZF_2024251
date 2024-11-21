@@ -25,6 +25,8 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         void DeleteRailwayLine(string id);*/
 
+        public void FillDatabaseFirstTime(string path);
+
         public void FillDatabaseWithNewData(string path);
 
     }
@@ -33,22 +35,23 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
     {
         private readonly RailwayLinesDbContext ctx;
 
-        public IJsonImportToDb jsonImportToDb = new JsonImportToDb();
-        
+        private readonly IJsonImportToDb jsonImportToDb;
 
-        public RailwayLinesDataProvider(RailwayLinesDbContext ctx)
+
+        public RailwayLinesDataProvider(RailwayLinesDbContext ctx, IJsonImportToDb jsonImportToDb)
         {
             this.ctx = ctx;
+            this.jsonImportToDb = jsonImportToDb;
         }
 
         public void FillDatabaseFirstTime(string path)
         {
-            jsonImportToDb!.JsonIntoDb(path, ctx);
+            jsonImportToDb.JsonIntoDb(path);
         }
 
         public void FillDatabaseWithNewData(string path)
         {
-            jsonImportToDb!.NewJsonIntoDb(path, ctx);
+            jsonImportToDb.NewJsonIntoDb(path);
         }
     }
 }

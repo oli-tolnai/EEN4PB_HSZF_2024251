@@ -10,27 +10,23 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 {
     public interface IJsonImportToDb
     {
-        /*
-        List<RailwayLine> JsonDeserialize(string path);
+        public void JsonIntoDb(string path);
 
-        void JsonToDb(List<RailwayLine> railwayLines);*/
-
-        void JsonIntoDb(string path, RailwayLinesDbContext ctx);
-        public void NewJsonIntoDb(string path, RailwayLinesDbContext ctx);
+        public void NewJsonIntoDb(string path);
     }
 
     public class JsonImportToDb  : IJsonImportToDb
     {
-        /*
+        
         private readonly RailwayLinesDbContext ctx;
 
         public JsonImportToDb(RailwayLinesDbContext ctx)
         {
-            ctx = this.ctx;
-        }*/
+            this.ctx = ctx;
+        }
 
         
-        public void JsonIntoDb(string path, RailwayLinesDbContext ctx)
+        public void JsonIntoDb(string path)
         {
             string jsonString = File.ReadAllText(path);
             Console.WriteLine(jsonString);
@@ -49,7 +45,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
         }
 
 
-        public void NewJsonIntoDb(string path, RailwayLinesDbContext ctx)
+        public void NewJsonIntoDb(string path)
         {
             string jsonString = File.ReadAllText(path);
             Console.WriteLine(jsonString);

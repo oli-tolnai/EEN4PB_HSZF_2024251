@@ -18,6 +18,7 @@ namespace EEN4PB_HSZF_2024251
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddScoped<RailwayLinesDbContext>();
+                    services.AddSingleton<IJsonImportToDb, JsonImportToDb>();   
                     services.AddSingleton<IRailwayLinesDataProvider, RailwayLinesDataProvider>();
                     services.AddSingleton<IRailwayLinesLogic, RailwayLinesLogic>();
 
@@ -31,7 +32,7 @@ namespace EEN4PB_HSZF_2024251
 
             IRailwayLinesLogic railwayLogic = host.Services.GetRequiredService<IRailwayLinesLogic>();
 
-            railwayLogic.FillDatabaseWithNewData(Menu.FirstMenu());
+            railwayLogic.FillDatabaseFirstTime(Menu.FirstMenu());
 
             Menu.MainMenu(railwayLogic);
 
