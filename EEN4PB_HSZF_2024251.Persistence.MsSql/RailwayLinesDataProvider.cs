@@ -11,8 +11,9 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 {
     public interface IRailwayLinesDataProvider
     {
+        /*
         RailwayLine GetRailwayLineById(string id);
-
+        
         List<RailwayLine> GetRailwayLines();
 
         //RailwayLine CRUD operations
@@ -22,7 +23,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         void UpdateRailwayLine(RailwayLine railwayLine);
 
-        void DeleteRailwayLine(string id);
+        void DeleteRailwayLine(string id);*/
 
         public void UpdateDatabase(string path);
 
@@ -41,41 +42,13 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             jsonImportToDb!.JsonIntoDb(path, ctx);
         }
 
-        public void CreateRailwayLine(RailwayLine railwayLine)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteRailwayLine(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public RailwayLine GetRailwayLineById(string id)
-        {
-            return ctx.RailwayLines.FirstOrDefault(x => x.Id == id);
-        }
-
-        public List<RailwayLine> GetRailwayLines()
-        {
-            return ctx.RailwayLines.ToList();
-        }
-
-        public IEnumerable<RailwayLine> ReadAllRailwayLines()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateRailwayLine(RailwayLine railwayLine)
-        {
-            throw new NotImplementedException();
-        }
-
 
         public void UpdateDatabase(string path)
         {
             jsonImportToDb!.NewJsonIntoDb(path, ctx);
         }
+
+
 
 
         /*

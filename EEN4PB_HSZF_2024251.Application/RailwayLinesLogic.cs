@@ -5,9 +5,10 @@ namespace EEN4PB_HSZF_2024251.Application
 {
     public interface IRailwayLinesLogic
     {
+        /*
         RailwayLine GetRailwayLineById(string id);
 
-        List<RailwayLine> GetRailwayLines();
+        List<RailwayLine> GetRailwayLines();*/
 
         public void UpdateDatabase(string path);
 
@@ -21,17 +22,6 @@ namespace EEN4PB_HSZF_2024251.Application
         public RailwayLinesLogic(IRailwayLinesDataProvider railwayLinesDataProvider)
         {
             this.provider = railwayLinesDataProvider;
-        }
-
-
-        public RailwayLine GetRailwayLineById(string id)
-        {
-            return provider.GetRailwayLineById(id);
-        }
-
-        public List<RailwayLine> GetRailwayLines()
-        {
-            return provider.GetRailwayLines();
         }
 
         public void UpdateDatabase(string path)

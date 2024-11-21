@@ -48,7 +48,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             ctx.SaveChanges();
         }
 
-        //Import another JSON file to the database, if it contains the same RailwayLine which means the LineNumber and the LineName are the same, then only add the NEW services to the existing RailwayLine. Servicies are equal if the TrainNumber, From, To, DelayAmount and TrainType are the same. If the railwayline new then add the whole railwayline and its services to the database
+
         public void NewJsonIntoDb(string path, RailwayLinesDbContext ctx)
         {
             string jsonString = File.ReadAllText(path);
@@ -81,37 +81,5 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             }
             ctx.SaveChanges();
         }
-
-
-
-
-        /*
-        //JsonDeserialize method is used to deserialize the JSON data
-        public List<RailwayLine> JsonDeserialize(string path)
-        {
-            string jsonString = File.ReadAllText(path);
-            Console.WriteLine(jsonString);
-
-            RailwayData railwayData = JsonConvert.DeserializeObject<RailwayData>(jsonString);
-
-
-            return railwayData.RailwayLines;
-        }
-
-        //JsonToDb method is used to convert the deserialized JSON data to database entities
-        public void JsonToDb(List<RailwayLine> railwayLines)
-        {
-            foreach (var railwayLine in railwayLines)
-            {
-                ctx.RailwayLines.Add(railwayLine);
-                foreach (var service in railwayLine.Services)
-                {
-                    ctx.Services.Add(service);
-                }
-            }
-            ctx.SaveChanges();
-        }*/
-
-
     }
 }
