@@ -122,7 +122,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
             foreach (var railwayLine in railwayData!.RailwayLines)
             {
-                var existingRailwayLine = ctx.RailwayLines.FirstOrDefault(x => x.LineNumber == railwayLine.LineNumber && x.LineName == railwayLine.LineName);
+                var existingRailwayLine = ctx.RailwayLines.FirstOrDefault(x => x.LineNumber == railwayLine.LineNumber || x.LineName == railwayLine.LineName);
                 if (existingRailwayLine != null)
                 {
                     foreach (var service in railwayLine.Services)
