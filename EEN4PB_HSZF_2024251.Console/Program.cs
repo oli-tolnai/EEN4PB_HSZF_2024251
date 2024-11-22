@@ -6,7 +6,9 @@ using ConsoleTools;
 using System.IO;
 using System;
 using EEN4PB_HSZF_2024251.Model;
-using EEN4PB_HSZF_2024251.Console;
+using EEN4PB_HSZF_2024251;
+
+
 
 namespace EEN4PB_HSZF_2024251
 {
