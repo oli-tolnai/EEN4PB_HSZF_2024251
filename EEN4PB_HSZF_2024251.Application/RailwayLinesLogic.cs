@@ -10,9 +10,10 @@ namespace EEN4PB_HSZF_2024251.Application
 
         List<RailwayLine> GetRailwayLines();*/
 
-        public void FillDatabaseFirstTime(string path);
 
-        public void FillDatabaseWithNewData(string path);
+        public void FillDatabaseFirstTimeWithProvider(string path);
+
+        public void FillDatabaseWithNewDataWithProvider(string path);
 
 
     }
@@ -25,12 +26,13 @@ namespace EEN4PB_HSZF_2024251.Application
         {
             this.provider = railwayLinesDataProvider;
         }
-        public void FillDatabaseFirstTime(string path)
+
+        public void FillDatabaseFirstTimeWithProvider(string path)
         {
-            provider.FillDatabaseFirstTime(path);
+            provider.FillDatabaseWithNewData(path);
         }
 
-        public void FillDatabaseWithNewData(string path)
+        public void FillDatabaseWithNewDataWithProvider(string path)
         {
             provider.FillDatabaseWithNewData(path);
         }
