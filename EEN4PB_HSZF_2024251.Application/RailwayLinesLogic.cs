@@ -10,6 +10,7 @@ namespace EEN4PB_HSZF_2024251.Application
 
         List<RailwayLine> GetRailwayLines();*/
 
+        public void CreateRailwayLine(RailwayLine railwayLine);
 
         public void FillDatabaseFirstTimeWithProvider(string path);
 
@@ -25,6 +26,11 @@ namespace EEN4PB_HSZF_2024251.Application
         public RailwayLinesLogic(IRailwayLinesDataProvider railwayLinesDataProvider)
         {
             this.provider = railwayLinesDataProvider;
+        }
+
+        public void CreateRailwayLine(RailwayLine railwayLine)
+        {
+            provider.CreateRailwayLine(railwayLine);
         }
 
         public void FillDatabaseFirstTimeWithProvider(string path)

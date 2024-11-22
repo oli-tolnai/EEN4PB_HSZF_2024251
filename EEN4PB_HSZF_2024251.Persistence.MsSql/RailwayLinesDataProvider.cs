@@ -17,7 +17,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
         List<RailwayLine> GetRailwayLines();
 
         //RailwayLine CRUD operations
-        void CreateRailwayLine(RailwayLine railwayLine);
+        
 
         IEnumerable<RailwayLine> ReadAllRailwayLines();
 
@@ -25,6 +25,17 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         void DeleteRailwayLine(string id);*/
 
+        public void CreateRailwayLine(RailwayLine railwayLine);
+
+        public RailwayLine FindById(string id);
+
+        public void DeleteById(string id);
+
+        public void Delete(RailwayLine railwayLine);
+
+        public IQueryable<RailwayLine> GetAll();
+
+        public void Update(RailwayLine railwayLine);
 
         public void FillDatabaseFirstTime(string path);
 
@@ -36,16 +47,52 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
     {
         private readonly RailwayLinesDbContext ctx;
 
-
-
         public RailwayLinesDataProvider(RailwayLinesDbContext ctx)
         {
             this.ctx = ctx;
         }
 
+        //CRUD operations: Create, Read, Update and Delete RailwayLine
+        public void CreateRailwayLine(RailwayLine railwayLine)
+        {
+            ctx.Set<RailwayLine>().Add(railwayLine);
+            ctx.SaveChanges();
+        }
 
+        public RailwayLine FindById(string id)
+        {
+            return ctx.Set<RailwayLine>().First(t => t.Id == id);
+        }
 
+        public void DeleteById(string id)
+        {
+            var railwayLine = FindById(id);
+            ctx.Set<RailwayLine>().Remove(railwayLine);
+            ctx.SaveChanges();
+        }
 
+        public void Delete(RailwayLine railwayLine)
+        {
+            ctx.Set<RailwayLine>().Remove(railwayLine);
+            ctx.SaveChanges();
+        }
+
+        public IQueryable<RailwayLine> GetAll()
+        {
+            return ctx.Set<RailwayLine>();
+        }
+
+        public void Update(RailwayLine railwayLine)
+        {
+            var old = FindById(railwayLine.Id);
+
+            foreach (var prop in typeof(RailwayLine).GetProperties())
+            {
+                prop.SetValue(old, prop.GetValue(railwayLine));
+            }
+            ctx.Set<RailwayLine>().Update(old);
+            ctx.SaveChanges();
+        }
 
 
         public void FillDatabaseFirstTime(string path)
@@ -98,6 +145,8 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             }
             ctx.SaveChanges();
         }
+
+
 
     }
 }
