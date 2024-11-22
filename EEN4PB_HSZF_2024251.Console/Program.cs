@@ -33,10 +33,11 @@ namespace EEN4PB_HSZF_2024251
 
             IRailwayLinesLogic railwayLogic = host.Services.GetRequiredService<IRailwayLinesLogic>();
 
-            railwayLogic.FillDatabaseFirstTimeWithProvider(Menu.FirstMenu());
+            railwayLogic.FillDatabaseFirstTime(Menu.FirstMenu());
 
             Menu.MainMenu(railwayLogic);
 
+            //var ca = Menu.CreateRailwayLinesWithInput("nana", "nanana");
 
 
 

@@ -12,9 +12,11 @@ namespace EEN4PB_HSZF_2024251.Application
 
         public void CreateRailwayLine(RailwayLine railwayLine);
 
-        public void FillDatabaseFirstTimeWithProvider(string path);
+        public void FillDatabaseFirstTime(string path);
 
-        public void FillDatabaseWithNewDataWithProvider(string path);
+        public void FillDatabaseWithNewData(string path);
+
+        public void CreateRailwayLinesConsole(string lineName, string lineNumber);
 
 
     }
@@ -33,14 +35,23 @@ namespace EEN4PB_HSZF_2024251.Application
             provider.CreateRailwayLine(railwayLine);
         }
 
-        public void FillDatabaseFirstTimeWithProvider(string path)
+        public void FillDatabaseFirstTime(string path)
         {
             provider.FillDatabaseWithNewData(path);
         }
 
-        public void FillDatabaseWithNewDataWithProvider(string path)
+        public void FillDatabaseWithNewData(string path)
         {
             provider.FillDatabaseWithNewData(path);
+        }
+
+        public void CreateRailwayLinesConsole(string lineName, string lineNumber)
+        {
+
+            var newRailwayLine = new RailwayLine { LineName = lineName, LineNumber = lineNumber };
+            
+            provider.CreateRailwayLine(newRailwayLine);
+
         }
 
     }

@@ -15,6 +15,7 @@ namespace EEN4PB_HSZF_2024251.Model
 
         public RailwayLine()
         {
+            Id = Guid.NewGuid().ToString();
             Services = new HashSet<Service>();
         }
 
