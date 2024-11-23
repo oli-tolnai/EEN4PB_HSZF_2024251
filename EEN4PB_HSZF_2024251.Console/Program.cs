@@ -35,13 +35,13 @@ namespace EEN4PB_HSZF_2024251
 
 
             railwayLogic.FillDatabaseFirstTime(Menu.FirstMenu());
+
             Menu.MainMenu(railwayLogic);
 
 
 
 
 
-            //TODO: konzolon railwayline hozzáadaása nézze hogy nem a létezik már
 
 
             /* TESTS

@@ -12,6 +12,10 @@ namespace EEN4PB_HSZF_2024251.Application
 
         public void CreateRailwayLine(RailwayLine railwayLine);
 
+        public void DeleteRailwayLine(string id);
+
+        public IQueryable<RailwayLine> GetAllRailwayLines();
+
         public void FillDatabaseFirstTime(string path);
 
         public void FillDatabaseWithNewData(string path);
@@ -35,9 +39,20 @@ namespace EEN4PB_HSZF_2024251.Application
             provider.CreateRailwayLine(railwayLine);
         }
 
+        public void DeleteRailwayLine(string id)
+        {
+            provider.DeleteById(id);
+        }
+
+        public IQueryable<RailwayLine> GetAllRailwayLines()
+        {
+            return provider.GetAll();
+        }
+
+
         public void FillDatabaseFirstTime(string path)
         {
-            provider.FillDatabaseWithNewData(path);
+            provider.FillDatabaseFirstTime(path);
         }
 
         public void FillDatabaseWithNewData(string path)
@@ -71,6 +86,7 @@ namespace EEN4PB_HSZF_2024251.Application
             }
             return false;
         }
+
 
     }
 }

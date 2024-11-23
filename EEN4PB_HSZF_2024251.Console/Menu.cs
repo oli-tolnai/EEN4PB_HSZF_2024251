@@ -3,6 +3,7 @@ using EEN4PB_HSZF_2024251.Model;
 using EEN4PB_HSZF_2024251.Persistence.MsSql;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,9 +24,24 @@ namespace EEN4PB_HSZF_2024251
             Console.WriteLine("\nTo start the application, the database must be loaded. To do this, enter the path to the json file.");
             return PathInput();
         }
+        public static void WriteOutRailwayLines(IRailwayLinesLogic railwayLogic)
+        {
+            var items = railwayLogic.GetAllRailwayLines();
+
+            //write out all railway lines to console
+            int db = 0;
+            foreach (var item in items)
+            {
+                db++;
+                Console.WriteLine($"{db}.\t{item.LineNumber}\t{item.LineName}\n");
+
+            }
+        }
 
         public static void MainMenu(IRailwayLinesLogic railwayLogic)
         {
+            Console.ReadLine();
+            Console.Clear();
             Console.WriteLine("1. Import another JSON file to database");
             Console.WriteLine("2. Create a new Railway Line");
             Console.WriteLine("3. Delete an existing Railway Line");
@@ -37,8 +53,7 @@ namespace EEN4PB_HSZF_2024251
 
             int input;
             bool isValidInput = false;
-            bool correctNumber = false;
-            while (!isValidInput || !correctNumber)
+            while (!isValidInput /*|| !correctNumber*/)
             {
                 Console.Write("Enter your choice: ");
                 string userInput = Console.ReadLine();
@@ -51,22 +66,23 @@ namespace EEN4PB_HSZF_2024251
                     //Console.Clear();
                     Console.WriteLine("Invalid input. Please enter a number.");
                 }
-                else if (input != 1 && input != 2 && input != 8)
+                else if (input != 1 && input != 2 && input != 3 && input != 8)
                 {
                     //Console.Clear();
                     Console.WriteLine("Invalid input. Please choose a valid number.");
-                    correctNumber = false;
+                    isValidInput = false;
                 }
-                else if (input == 1 || input == 2 || input == 8)
+                else if (input == 1 || input == 2 || input == 3 || input == 8)
                 {
+                    //1. Import another JSON file to database
                     if (input == 1)
                     {
                         //Console.Clear();
                         railwayLogic.FillDatabaseWithNewData(PathInput());
                         Console.WriteLine("New JSON file imported to the database");
                         MainMenu(railwayLogic);
-                        correctNumber = true;
                     }
+                    //2. Create a new Railway Line
                     else if (input == 2)
                     {
                         string inputLineName = "";
@@ -89,14 +105,49 @@ namespace EEN4PB_HSZF_2024251
                         }
                         railwayLogic.CreateRailwayLinesConsole(inputLineName, inputLineNumber);
                         MainMenu(railwayLogic);
-                        correctNumber = true;
+                    }
+                    //3.Delete an existing Railway Line
+                    else if (input == 3)
+                    {
+                        //if railway line is empty, return to main menu
+                        if (railwayLogic.GetAllRailwayLines().Count() == 0)
+                        {
+                            Console.WriteLine("There are no Railway Lines to delete.");
+                            MainMenu(railwayLogic);
+                        }
+                        //else
+                        var allrailwayLines = railwayLogic.GetAllRailwayLines();
+                        WriteOutRailwayLines(railwayLogic);
+                        int deleteInput;
+                        var isValidDeleteInput = false;
+                        while (!isValidDeleteInput)
+                        {
+                            Console.Write("Enter the number of the Railway Line you want to delete: ");
+                            string userDeleteInput = Console.ReadLine();
+                            isValidDeleteInput = int.TryParse(userDeleteInput, out deleteInput);
+                            if (!isValidDeleteInput)
+                            {
+                                Console.WriteLine("Invalid input. Please enter a number.");
+                            }
+                            else if (deleteInput < 1 || deleteInput > allrailwayLines.Count())
+                            {
+                                Console.WriteLine("Invalid input. Please choose a valid number.");
+                                isValidDeleteInput = false;
+                            }
+                            else
+                            {
+                                railwayLogic.DeleteRailwayLine(allrailwayLines.ToList()[deleteInput - 1].Id);
+                                Console.WriteLine("Railway Line deleted");
+                                isValidDeleteInput = true;
+                            }
+                        }
+                        MainMenu(railwayLogic);
                     }
                     else if (input == 8)
                     {
                         //Console.Clear();
                         Console.WriteLine("Goodbye!");
                         Environment.Exit(0);
-                        correctNumber = true;
                     }
                 }
             }

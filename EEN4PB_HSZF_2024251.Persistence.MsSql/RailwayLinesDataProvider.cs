@@ -142,6 +142,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
                         ctx.Services.Add(service);
                     }
                 }
+                //ctx.SaveChanges();
             }
             ctx.SaveChanges();
         }
