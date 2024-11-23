@@ -37,9 +37,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         public void Update(RailwayLine railwayLine);
 
-        public void FillDatabaseFirstTime(string path);
-
-        public void FillDatabaseWithNewData(string path);
+        public void FillDatabase(string path);
 
     }
 
@@ -94,8 +92,8 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             ctx.SaveChanges();
         }
 
-
-        public void FillDatabaseFirstTime(string path)
+        
+        /*public void FillDatabaseFirstTime(string path)
         {
             string jsonString = File.ReadAllText(path);
             //Console.WriteLine(jsonString);
@@ -111,9 +109,9 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
                 }
             }
             ctx.SaveChanges();
-        }
+        }*/
 
-        public void FillDatabaseWithNewData(string path)
+        public void FillDatabase(string path)
         {
             string jsonString = File.ReadAllText(path);
             //Console.WriteLine(jsonString);
@@ -142,9 +140,9 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
                         ctx.Services.Add(service);
                     }
                 }
-                //ctx.SaveChanges();
+                ctx.SaveChanges();
             }
-            ctx.SaveChanges();
+            //ctx.SaveChanges();
         }
 
 

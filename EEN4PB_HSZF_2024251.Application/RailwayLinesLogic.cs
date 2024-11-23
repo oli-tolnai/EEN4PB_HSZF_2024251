@@ -16,9 +16,7 @@ namespace EEN4PB_HSZF_2024251.Application
 
         public IQueryable<RailwayLine> GetAllRailwayLines();
 
-        public void FillDatabaseFirstTime(string path);
-
-        public void FillDatabaseWithNewData(string path);
+        public void FillDatabase(string path);
 
         public void CreateRailwayLinesConsole(string lineName, string lineNumber);
 
@@ -50,14 +48,9 @@ namespace EEN4PB_HSZF_2024251.Application
         }
 
 
-        public void FillDatabaseFirstTime(string path)
+        public void FillDatabase(string path)
         {
-            provider.FillDatabaseFirstTime(path);
-        }
-
-        public void FillDatabaseWithNewData(string path)
-        {
-            provider.FillDatabaseWithNewData(path);
+            provider.FillDatabase(path);
         }
 
         public void CreateRailwayLinesConsole(string lineName, string lineNumber)

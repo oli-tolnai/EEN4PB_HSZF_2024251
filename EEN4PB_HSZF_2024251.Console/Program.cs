@@ -34,7 +34,7 @@ namespace EEN4PB_HSZF_2024251
             IRailwayLinesLogic railwayLogic = host.Services.GetRequiredService<IRailwayLinesLogic>();
 
 
-            railwayLogic.FillDatabaseFirstTime(Menu.FirstMenu());
+            railwayLogic.FillDatabase(Menu.FirstMenu());
 
             Menu.MainMenu(railwayLogic);
 

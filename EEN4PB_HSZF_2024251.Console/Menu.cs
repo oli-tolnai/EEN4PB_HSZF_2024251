@@ -78,7 +78,7 @@ namespace EEN4PB_HSZF_2024251
                     if (input == 1)
                     {
                         //Console.Clear();
-                        railwayLogic.FillDatabaseWithNewData(PathInput());
+                        railwayLogic.FillDatabase(PathInput());
                         Console.WriteLine("New JSON file imported to the database");
                         MainMenu(railwayLogic);
                     }
