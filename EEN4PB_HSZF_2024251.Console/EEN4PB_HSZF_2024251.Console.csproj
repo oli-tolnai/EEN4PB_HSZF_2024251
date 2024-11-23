@@ -11,6 +11,7 @@
 	  <None Remove="JSON_files\data2.json" />
 	  <None Remove="JSON_files\data3.json" />
 	  <None Remove="JSON_files\data4.json" />
+	  <None Remove="JSON_files\data5.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -24,6 +25,9 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="JSON_files\data4.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="JSON_files\data5.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
