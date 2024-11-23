@@ -7,7 +7,6 @@ namespace EEN4PB_HSZF_2024251.Model
     {
         public RailwayLine(string lineName, string lineNumber)
         {
-            Id = Guid.NewGuid().ToString();
             LineName = lineName;
             LineNumber = lineNumber;
             Services = new HashSet<Service>();
@@ -15,18 +14,15 @@ namespace EEN4PB_HSZF_2024251.Model
 
         public RailwayLine()
         {
-            Id = Guid.NewGuid().ToString();
             Services = new HashSet<Service>();
         }
-
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Id { get; set; }
 
         [Required]
         [StringLength(100)]
         public string LineName { get; set; }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
         [StringLength(50)]
         public string LineNumber { get; set; }

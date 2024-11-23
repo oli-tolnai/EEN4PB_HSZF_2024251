@@ -61,7 +61,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         public RailwayLine FindById(string id)
         {
-            return ctx.Set<RailwayLine>().First(t => t.Id == id);
+            return ctx.Set<RailwayLine>().First(t => t.LineNumber == id);
         }
 
         public void DeleteById(string id)
@@ -84,7 +84,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         public void Update(RailwayLine railwayLine)
         {
-            var old = FindById(railwayLine.Id);
+            var old = FindById(railwayLine.LineNumber);
 
             foreach (var prop in typeof(RailwayLine).GetProperties())
             {
