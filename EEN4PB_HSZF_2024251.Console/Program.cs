@@ -34,27 +34,9 @@ namespace EEN4PB_HSZF_2024251
             IRailwayLinesLogic railwayLogic = host.Services.GetRequiredService<IRailwayLinesLogic>();
 
 
-            railwayLogic.FillDatabase(Menu.FirstMenu());
-
-            Menu.MainMenu(railwayLogic);
+            Menu.FirstMenu(railwayLogic);
 
 
-
-
-
-
-
-            /* TESTS
-            var q1 = serviceProvider.GetServices();
-            var id = q1[1].Id;
-            var q2 = serviceProvider.GetServiceById(id);
-            var q3 = serviceProvider.GetRailwayLineServices("120A", "BP-Keleti->Szolnok");
-
-            ;
-            railwayProvider.UpdateDatabase(Menu.PathInput());
-
-            var q4 = serviceProvider.GetRailwayLineServices("120A", "BP-Keleti->Szolnok");
-            */
 
             ;
         }

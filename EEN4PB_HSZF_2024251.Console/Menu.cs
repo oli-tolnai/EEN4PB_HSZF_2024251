@@ -1,6 +1,7 @@
 ﻿using EEN4PB_HSZF_2024251.Application;
 using EEN4PB_HSZF_2024251.Model;
 using EEN4PB_HSZF_2024251.Persistence.MsSql;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,33 +16,36 @@ namespace EEN4PB_HSZF_2024251
 
         public static string PathInput()
         {
-            Console.Write("Please enter the path of the JSON file: ");
-            return Console.ReadLine();
-        }
+            Console.WriteLine("Please enter the path of the JSON file you want to import to the database:");
+            var path = Console.ReadLine();
 
-        public static string FirstMenu()
-        {
-            Console.WriteLine("\nTo start the application, the database must be loaded. To do this, enter the path to the json file.");
-            return PathInput();
-        }
-        public static void WriteOutRailwayLines(IRailwayLinesLogic railwayLogic)
-        {
-            var items = railwayLogic.GetAllRailwayLines();
-
-            //write out all railway lines to console
-            int db = 0;
-            foreach (var item in items)
+            var jsonfileexists = File.Exists(path);
+            while (!jsonfileexists || !path.EndsWith(".json"))
             {
-                db++;
-                Console.WriteLine($"{db}.\t{item.LineNumber}\t{item.LineName}\n");
-
+                Console.WriteLine("File not found or it's not a json file. Please try again:");
+                path = Console.ReadLine();
+                jsonfileexists = File.Exists(path);
             }
+            Console.WriteLine("File found. Importing to database...");
+            return path;
+        }
+
+        public static void FirstMenu(IRailwayLinesLogic railwayLogic)
+        {
+            Console.Clear();
+            Console.WriteLine("Welcome to the Railway Line Manager");
+            Console.WriteLine("===================================\n");
+            railwayLogic.FillDatabase(PathInput());
+            MainMenu(railwayLogic);
         }
 
         public static void MainMenu(IRailwayLinesLogic railwayLogic)
         {
+            Console.WriteLine("Press Enter to continue");
             Console.ReadLine();
             Console.Clear();
+
+            Console.WriteLine("Choose an option from the menu below:\n");
             Console.WriteLine("1. Import another JSON file to database");
             Console.WriteLine("2. Create a new Railway Line");
             Console.WriteLine("3. Delete an existing Railway Line");
@@ -53,22 +57,19 @@ namespace EEN4PB_HSZF_2024251
 
             int input;
             bool isValidInput = false;
-            while (!isValidInput /*|| !correctNumber*/)
+            while (!isValidInput)
             {
                 Console.Write("Enter your choice: ");
                 string userInput = Console.ReadLine();
 
                 isValidInput = int.TryParse(userInput, out input);
-                //Console.WriteLine("Your choice: "+input);
 
                 if (!isValidInput)
                 {
-                    //Console.Clear();
                     Console.WriteLine("Invalid input. Please enter a number.");
                 }
                 else if (input != 1 && input != 2 && input != 3 && input != 8)
                 {
-                    //Console.Clear();
                     Console.WriteLine("Invalid input. Please choose a valid number.");
                     isValidInput = false;
                 }
@@ -77,7 +78,6 @@ namespace EEN4PB_HSZF_2024251
                     //1. Import another JSON file to database
                     if (input == 1)
                     {
-                        //Console.Clear();
                         railwayLogic.FillDatabase(PathInput());
                         Console.WriteLine("New JSON file imported to the database");
                         MainMenu(railwayLogic);
@@ -145,11 +145,25 @@ namespace EEN4PB_HSZF_2024251
                     }
                     else if (input == 8)
                     {
-                        //Console.Clear();
+                        Console.Clear();
                         Console.WriteLine("Goodbye!");
                         Environment.Exit(0);
                     }
                 }
+            }
+        }
+
+        public static void WriteOutRailwayLines(IRailwayLinesLogic railwayLogic)
+        {
+            var items = railwayLogic.GetAllRailwayLines();
+
+            //write out all railway lines to console
+            int db = 0;
+            foreach (var item in items)
+            {
+                db++;
+                Console.WriteLine($"{db}.\t{item.LineNumber}\t{item.LineName}\n");
+
             }
         }
     }

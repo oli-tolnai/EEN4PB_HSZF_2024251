@@ -8,6 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="JSON_files\data.txt" />
 	  <None Remove="JSON_files\data2.json" />
 	  <None Remove="JSON_files\data3.json" />
 	  <None Remove="JSON_files\data4.json" />
@@ -15,6 +16,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="JSON_files\data.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="JSON_files\data1.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
