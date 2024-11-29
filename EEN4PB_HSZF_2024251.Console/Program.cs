@@ -16,6 +16,7 @@ namespace EEN4PB_HSZF_2024251
     {
         static void Main(string[] args)
         {
+
             var host = Host.CreateDefaultBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {

@@ -68,12 +68,12 @@ namespace EEN4PB_HSZF_2024251
                 {
                     Console.WriteLine("Invalid input. Please enter a number.");
                 }
-                else if (input != 1 && input != 2 && input != 3 && input != 8)
+                else if (input != 1 && input != 2 && input != 3 && input != 4 && input != 8)
                 {
                     Console.WriteLine("Invalid input. Please choose a valid number.");
                     isValidInput = false;
                 }
-                else if (input == 1 || input == 2 || input == 3 || input == 8)
+                else if (input == 1 || input == 2 || input == 3 || input == 4 || input == 8 )
                 {
                     //1. Import another JSON file to database
                     if (input == 1)
@@ -139,6 +139,53 @@ namespace EEN4PB_HSZF_2024251
                                 railwayLogic.DeleteRailwayLine(allrailwayLines.ToList()[deleteInput - 1].Id);
                                 Console.WriteLine("Railway Line deleted");
                                 isValidDeleteInput = true;
+                            }
+                        }
+                        MainMenu(railwayLogic);
+                    }
+                    //4. Change name or number of a railway line.
+                    else if (input == 4)
+                    {
+                        //if railway line is empty, return to main menu
+                        if (railwayLogic.GetAllRailwayLines().Count() == 0)
+                        {
+                            Console.WriteLine("There are no Railway Lines to update.");
+                            MainMenu(railwayLogic);
+                        }
+                        //else
+                        var allrailwayLines = railwayLogic.GetAllRailwayLines();
+                        WriteOutRailwayLines(railwayLogic);
+                        int updateInput;
+                        var isValidUpdateInput = false;
+                        while (!isValidUpdateInput)
+                        {
+                            Console.Write("Enter the number of the Railway Line you want to update: ");
+                            string userUpdateInput = Console.ReadLine();
+                            isValidUpdateInput = int.TryParse(userUpdateInput, out updateInput);
+                            if (!isValidUpdateInput)
+                            {
+                                Console.WriteLine("Invalid input. Please enter a number.");
+                            }
+                            else if (updateInput < 1 || updateInput > allrailwayLines.Count())
+                            {
+                                Console.WriteLine("Invalid input. Please choose a valid number.");
+                                isValidUpdateInput = false;
+                            }
+                            else
+                            {
+                                Console.Write("The Railway line you want to update: \n\t\t");
+                                Console.Write("Number: " + allrailwayLines.ToList()[updateInput - 1].LineNumber);
+                                Console.WriteLine("\tName: " + allrailwayLines.ToList()[updateInput - 1].LineName);
+
+                                Console.WriteLine("\nWhich you do not wish to change, leave blank.");
+                                Console.Write("New number: ");
+                                string inputLineNumber = Console.ReadLine();
+                                Console.Write("New name: ");
+                                string inputLineName = Console.ReadLine();
+
+                                railwayLogic.UpdateRailwayLineConsole(allrailwayLines.ToList()[updateInput - 1].Id, inputLineName, inputLineNumber);
+                                Console.WriteLine("Railway Line updated");
+                                isValidUpdateInput = true;
                             }
                         }
                         MainMenu(railwayLogic);

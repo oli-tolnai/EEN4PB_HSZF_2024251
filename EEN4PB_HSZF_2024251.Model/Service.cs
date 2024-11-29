@@ -41,6 +41,7 @@ namespace EEN4PB_HSZF_2024251.Model
         [StringLength(100)]
         public int TrainNumber { get; set; }
 
+        [Required]
         public int DelayAmount { get; set; }
 
         [Required]

@@ -35,7 +35,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         public IQueryable<RailwayLine> GetAll();
 
-        public void Update(RailwayLine railwayLine);
+        public void UpdateRailwayLineNameAndNumber(RailwayLine railwayLine, string railwayLineName, string railwayLineNumber);
 
         public void FillDatabase(string path);
 
@@ -80,7 +80,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             return ctx.Set<RailwayLine>();
         }
 
-        public void Update(RailwayLine railwayLine)
+        /*public void Update(RailwayLine railwayLine)
         {
             var old = FindById(railwayLine.Id);
 
@@ -90,7 +90,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             }
             ctx.Set<RailwayLine>().Update(old);
             ctx.SaveChanges();
-        }
+        }*/
 
         
         /*public void FillDatabaseFirstTime(string path)
@@ -145,9 +145,18 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             //ctx.SaveChanges();
         }
 
-
-
-
-
+        public void UpdateRailwayLineNameAndNumber(RailwayLine railwayLine, string railwayLineName, string railwayLineNumber)
+        {
+            if (railwayLineName != "")
+            {
+                railwayLine.LineName = railwayLineName;
+                ctx.SaveChanges();
+            }
+            if (railwayLineNumber != "")
+            {
+                railwayLine.LineNumber = railwayLineNumber;
+                ctx.SaveChanges();
+            }
+        }
     }
 }

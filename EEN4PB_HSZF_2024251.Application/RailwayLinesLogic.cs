@@ -20,6 +20,8 @@ namespace EEN4PB_HSZF_2024251.Application
 
         public void CreateRailwayLinesConsole(string lineName, string lineNumber);
 
+        public void UpdateRailwayLineConsole(string id, string lineName, string lineNumber);
+
 
     }
 
@@ -80,6 +82,10 @@ namespace EEN4PB_HSZF_2024251.Application
             return false;
         }
 
-
+        public void UpdateRailwayLineConsole(string id, string lineName, string lineNumber)
+        {
+            RailwayLine railwayline = provider.FindById(id);
+            provider.UpdateRailwayLineNameAndNumber(railwayline, lineName, lineNumber);
+        }
     }
 }
