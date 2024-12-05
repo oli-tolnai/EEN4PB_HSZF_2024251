@@ -1,4 +1,5 @@
 ﻿using EEN4PB_HSZF_2024251.Model;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +10,28 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 {
     public interface IServicesDataProvider
     {
-        Service GetServiceById(string id);
+        /*public Service GetServiceById(string id);
 
-        List<Service> GetServices();
+        public List<Service> GetServices();
 
-        List<Service> GetRailwayLineServices(string lineNumber, string lineName);
+        public List<Service> GetRailwayLineServices(string lineNumber, string lineName);
 
         //Service CRUD operations
-        void CreateService(string railwayLineId, Service service);
+        public void CreateService(string railwayLineId, Service service);
 
-        IEnumerable<Service> ReadAllServices();
+        public IEnumerable<Service> ReadAllServices();
 
-        void UpdateService(string id, Service service);
+        public void UpdateService(string id, Service service);
 
-        void DeleteService(string id);
+        public void DeleteService(string id);*/
+
+        public void CreateService(Service service);
+
+        public Service FindById(string id);
+
+        public IQueryable<Service> GetAll();
+
+        public void CreateService(string railwayLineId, Service service);
 
     }
 
@@ -35,6 +44,31 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             this.ctx = ctx;
         }
 
+        public void CreateService(Service service)
+        {
+            ctx.Set<Service>().Add(service);
+            ctx.SaveChanges();
+        }
+
+        public void CreateService(string railwayLineId, Service service)
+        {
+            //TODO: ServiceDatProvider then Logic
+            throw new NotImplementedException();
+        }
+
+        public Service FindById(string id)
+        {
+            return ctx.Set<Service>().FirstOrDefault(x => x.Id == id);
+        }
+
+        public IQueryable<Service> GetAll()
+        {
+            return ctx.Set<Service>();
+        }
+
+
+
+        /*
         public Service GetServiceById(string id)
         {
             return ctx.Services.FirstOrDefault(x => x.Id == id);
@@ -104,6 +138,6 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             }
             ctx.SaveChanges();
 
-        }
+        }*/
     }
 }

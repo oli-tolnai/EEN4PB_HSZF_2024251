@@ -59,7 +59,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         public RailwayLine FindById(string id)
         {
-            return ctx.Set<RailwayLine>().First(t => t.Id == id);
+            return ctx.Set<RailwayLine>().FirstOrDefault(t => t.Id == id);
         }
 
         public void DeleteById(string id)
@@ -158,5 +158,6 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
                 ctx.SaveChanges();
             }
         }
+
     }
 }

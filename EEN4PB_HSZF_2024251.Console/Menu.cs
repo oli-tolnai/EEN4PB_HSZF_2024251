@@ -1,6 +1,7 @@
 ﻿using EEN4PB_HSZF_2024251.Application;
 using EEN4PB_HSZF_2024251.Model;
 using EEN4PB_HSZF_2024251.Persistence.MsSql;
+using Humanizer;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
@@ -190,6 +191,61 @@ namespace EEN4PB_HSZF_2024251
                         }
                         MainMenu(railwayLogic);
                     }
+                    //5.Add new Service to an existing Railway Line
+                    else if (input == 5)
+                    {   /*
+                        if (railwayLogic.GetAllRailwayLines().Count() == 0)
+                        {
+                            Console.WriteLine("There are no Railway Lines to add a service to.");
+                            MainMenu(railwayLogic);
+                        }
+                        //else
+                        var allrailwayLines = railwayLogic.GetAllRailwayLines();
+                        WriteOutRailwayLines(railwayLogic);
+                        int addServiceInput;
+                        var isValidAddServiceInput = false;
+                        while (!isValidAddServiceInput)
+                        {
+                            Console.Write("Enter the number of the Railway Line you want to add a service to: ");
+                            string userAddServiceInput = Console.ReadLine();
+                            isValidAddServiceInput = int.TryParse(userAddServiceInput, out addServiceInput);
+                            if (!isValidAddServiceInput)
+                            {
+                                Console.WriteLine("Invalid input. Please enter a number.");
+                            }
+                            else if (addServiceInput < 1 || addServiceInput > allrailwayLines.Count())
+                            {
+                                Console.WriteLine("Invalid input. Please choose a valid number.");
+                                isValidAddServiceInput = false;
+                            }
+                            else
+                            {
+                                Console.Write("The Railway line you want to add a service to: \n\t\t");
+                                Console.Write("Number: " + allrailwayLines.ToList()[addServiceInput - 1].LineNumber);
+                                Console.WriteLine("\tName: " + allrailwayLines.ToList()[addServiceInput - 1].LineName);
+
+                                Console.Write("Service name: ");
+                                string inputServiceName = Console.ReadLine();
+                                Console.Write("Service number: ");
+                                string inputServiceNumber = Console.ReadLine();
+                                Console.Write("Service type: ");
+                                string inputServiceType = Console.ReadLine();
+                                Console.Write("Service length: ");
+                                string inputServiceLength = Console.ReadLine();
+                                Console.Write("Service start station: ");
+                                string inputServiceStartStation = Console.ReadLine();
+                                Console.Write("Service end station: ");
+                                string inputServiceEndStation = Console.ReadLine();
+
+                                railwayLogic.AddServiceToRailwayLineConsole(allrailwayLines.ToList()[addServiceInput - 1].Id, inputServiceName, inputServiceNumber, inputServiceType, inputServiceLength, inputServiceStartStation, inputServiceEndStation);
+                                Console.WriteLine("Service added to Railway Line");
+                                isValidAddServiceInput = true;
+                            }
+                        }
+                        MainMenu(railwayLogic);
+                        */
+                    }
+                    //8. Exit
                     else if (input == 8)
                     {
                         Console.Clear();
