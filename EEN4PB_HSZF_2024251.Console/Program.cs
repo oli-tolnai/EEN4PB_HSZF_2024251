@@ -25,6 +25,7 @@ namespace EEN4PB_HSZF_2024251
                     services.AddSingleton<IRailwayLinesLogic, RailwayLinesLogic>();
 
                     services.AddSingleton<IServicesDataProvider, ServicesDataProvider>();
+                    services.AddSingleton<IServicesLogic, ServicesLogic>();
 
                 })
                 .Build();
@@ -34,8 +35,16 @@ namespace EEN4PB_HSZF_2024251
 
             IRailwayLinesLogic railwayLogic = host.Services.GetRequiredService<IRailwayLinesLogic>();
 
+            IServicesLogic servicesLogic = host.Services.GetRequiredService<IServicesLogic>();
 
-            Menu.FirstMenu(railwayLogic);
+            Menu.FirstMenu(railwayLogic, servicesLogic);
+            ;
+
+
+            var i = Console.ReadLine();
+            var a = railwayLogic.FindById(i);
+            servicesLogic.ConsoleCreateAndAddService(a, "buda", "pest", 1, 0, "IC");
+
 
 
 

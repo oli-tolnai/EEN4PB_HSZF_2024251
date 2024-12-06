@@ -31,7 +31,8 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         public IQueryable<Service> GetAll();
 
-        public void CreateService(string railwayLineId, Service service);
+        //create service and add to a railwayline
+        public void ConsoleCreateAndAddService(RailwayLine railwayline, Service service);
 
     }
 
@@ -44,16 +45,17 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             this.ctx = ctx;
         }
 
+        public void ConsoleCreateAndAddService(RailwayLine railwayline, Service service)
+        {
+            CreateService(service);
+            railwayline.Services.Add(service);
+            ctx.SaveChanges();
+        }
+
         public void CreateService(Service service)
         {
             ctx.Set<Service>().Add(service);
             ctx.SaveChanges();
-        }
-
-        public void CreateService(string railwayLineId, Service service)
-        {
-            //TODO: ServiceDatProvider then Logic
-            throw new NotImplementedException();
         }
 
         public Service FindById(string id)

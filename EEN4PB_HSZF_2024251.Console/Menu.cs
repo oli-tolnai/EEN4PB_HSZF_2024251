@@ -31,16 +31,16 @@ namespace EEN4PB_HSZF_2024251
             return path;
         }
 
-        public static void FirstMenu(IRailwayLinesLogic railwayLogic)
+        public static void FirstMenu(IRailwayLinesLogic railwayLogic, IServicesLogic servicesLogic)
         {
             Console.Clear();
             Console.WriteLine("Welcome to the Railway Line Manager");
             Console.WriteLine("===================================\n");
             railwayLogic.FillDatabase(PathInput());
-            MainMenu(railwayLogic);
+            MainMenu(railwayLogic, servicesLogic);
         }
 
-        public static void MainMenu(IRailwayLinesLogic railwayLogic)
+        public static void MainMenu(IRailwayLinesLogic railwayLogic, IServicesLogic servicesLogic)
         {
             Console.WriteLine("Press Enter to continue");
             Console.ReadLine();
@@ -69,19 +69,19 @@ namespace EEN4PB_HSZF_2024251
                 {
                     Console.WriteLine("Invalid input. Please enter a number.");
                 }
-                else if (input != 1 && input != 2 && input != 3 && input != 4 && input != 8)
+                else if (input != 1 && input != 2 && input != 3 && input != 4 && input != 5 && input != 8)
                 {
                     Console.WriteLine("Invalid input. Please choose a valid number.");
                     isValidInput = false;
                 }
-                else if (input == 1 || input == 2 || input == 3 || input == 4 || input == 8 )
+                else if (input == 1 || input == 2 || input == 3 || input == 4 || input == 5 || input == 8 )
                 {
                     //1. Import another JSON file to database
                     if (input == 1)
                     {
                         railwayLogic.FillDatabase(PathInput());
                         Console.WriteLine("New JSON file imported to the database");
-                        MainMenu(railwayLogic);
+                        MainMenu(railwayLogic, servicesLogic);
                     }
                     //2. Create a new Railway Line
                     else if (input == 2)
@@ -105,7 +105,7 @@ namespace EEN4PB_HSZF_2024251
                             }
                         }
                         railwayLogic.CreateRailwayLinesConsole(inputLineName, inputLineNumber);
-                        MainMenu(railwayLogic);
+                        MainMenu(railwayLogic, servicesLogic);
                     }
                     //3.Delete an existing Railway Line
                     else if (input == 3)
@@ -114,7 +114,7 @@ namespace EEN4PB_HSZF_2024251
                         if (railwayLogic.GetAllRailwayLines().Count() == 0)
                         {
                             Console.WriteLine("There are no Railway Lines to delete.");
-                            MainMenu(railwayLogic);
+                            MainMenu(railwayLogic, servicesLogic);
                         }
                         //else
                         var allrailwayLines = railwayLogic.GetAllRailwayLines();
@@ -142,7 +142,7 @@ namespace EEN4PB_HSZF_2024251
                                 isValidDeleteInput = true;
                             }
                         }
-                        MainMenu(railwayLogic);
+                        MainMenu(railwayLogic, servicesLogic);
                     }
                     //4. Change name or number of a railway line.
                     else if (input == 4)
@@ -151,7 +151,7 @@ namespace EEN4PB_HSZF_2024251
                         if (railwayLogic.GetAllRailwayLines().Count() == 0)
                         {
                             Console.WriteLine("There are no Railway Lines to update.");
-                            MainMenu(railwayLogic);
+                            MainMenu(railwayLogic, servicesLogic);
                         }
                         //else
                         var allrailwayLines = railwayLogic.GetAllRailwayLines();
@@ -189,15 +189,15 @@ namespace EEN4PB_HSZF_2024251
                                 isValidUpdateInput = true;
                             }
                         }
-                        MainMenu(railwayLogic);
+                        MainMenu(railwayLogic, servicesLogic);
                     }
                     //5.Add new Service to an existing Railway Line
                     else if (input == 5)
-                    {   /*
+                    {   
                         if (railwayLogic.GetAllRailwayLines().Count() == 0)
                         {
                             Console.WriteLine("There are no Railway Lines to add a service to.");
-                            MainMenu(railwayLogic);
+                            MainMenu(railwayLogic, servicesLogic);
                         }
                         //else
                         var allrailwayLines = railwayLogic.GetAllRailwayLines();
@@ -224,26 +224,26 @@ namespace EEN4PB_HSZF_2024251
                                 Console.Write("Number: " + allrailwayLines.ToList()[addServiceInput - 1].LineNumber);
                                 Console.WriteLine("\tName: " + allrailwayLines.ToList()[addServiceInput - 1].LineName);
 
-                                Console.Write("Service name: ");
-                                string inputServiceName = Console.ReadLine();
-                                Console.Write("Service number: ");
-                                string inputServiceNumber = Console.ReadLine();
-                                Console.Write("Service type: ");
-                                string inputServiceType = Console.ReadLine();
-                                Console.Write("Service length: ");
-                                string inputServiceLength = Console.ReadLine();
-                                Console.Write("Service start station: ");
-                                string inputServiceStartStation = Console.ReadLine();
-                                Console.Write("Service end station: ");
-                                string inputServiceEndStation = Console.ReadLine();
+                                Console.Write("From: ");
+                                string inputFrom = Console.ReadLine();
+                                Console.Write("To: ");
+                                string inputTo = Console.ReadLine();
+                                Console.Write("Train number: ");
+                                string inputTrainNumber = Console.ReadLine();
+                                int inputTrainNumberInt = int.Parse(inputTrainNumber);
+                                Console.Write("Delay Amount: ");
+                                string inputDelayAmount = Console.ReadLine();
+                                int inputDelayAmountInt = int.Parse(inputDelayAmount);
+                                Console.Write("Train type: ");
+                                string inputTrainType = Console.ReadLine();
 
-                                railwayLogic.AddServiceToRailwayLineConsole(allrailwayLines.ToList()[addServiceInput - 1].Id, inputServiceName, inputServiceNumber, inputServiceType, inputServiceLength, inputServiceStartStation, inputServiceEndStation);
+                                servicesLogic.ConsoleCreateAndAddService(allrailwayLines.ToList()[addServiceInput - 1], inputFrom, inputTo, inputTrainNumberInt, inputDelayAmountInt, inputTrainType);
                                 Console.WriteLine("Service added to Railway Line");
                                 isValidAddServiceInput = true;
                             }
                         }
-                        MainMenu(railwayLogic);
-                        */
+                        MainMenu(railwayLogic, servicesLogic);
+                        
                     }
                     //8. Exit
                     else if (input == 8)
