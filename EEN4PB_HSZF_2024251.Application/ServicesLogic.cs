@@ -11,6 +11,8 @@ namespace EEN4PB_HSZF_2024251.Application
     public interface IServicesLogic
     {
         public void ConsoleCreateAndAddService(RailwayLine railwayline,  string from, string to, int trainNumber, int delayAmount, string trainType);
+
+        public IQueryable<Service> GetAllServices();
     }
 
     public class ServicesLogic : IServicesLogic
@@ -28,6 +30,11 @@ namespace EEN4PB_HSZF_2024251.Application
             newservice.RailwayLineId = railwayline.Id;
             provider.ConsoleCreateAndAddService(railwayline, newservice);
 
+        }
+
+        public IQueryable<Service> GetAllServices()
+        {
+            return provider.GetAll();
         }
     }
 }

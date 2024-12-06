@@ -37,14 +37,24 @@ namespace EEN4PB_HSZF_2024251
 
             IServicesLogic servicesLogic = host.Services.GetRequiredService<IServicesLogic>();
 
-            Menu.FirstMenu(railwayLogic, servicesLogic);
-            ;
+            //Menu.FirstMenu(railwayLogic, servicesLogic);
 
+            
 
-            var i = Console.ReadLine();
-            var a = railwayLogic.FindById(i);
-            servicesLogic.ConsoleCreateAndAddService(a, "buda", "pest", 1, 0, "IC");
+            var sConsole = new ConsoleMenu();
 
+            sConsole.Add("Import a JSON file to database", () => Menu.MenuOptionOne(railwayLogic, sConsole))
+                      .Add("Create a new Railway Line", () => Menu.MenuOptionTwo(railwayLogic, sConsole))
+                      .Add("Delete an existing Railway Line", () => Menu.MenuOptionThree(railwayLogic, sConsole))
+                      .Add("Change name or number of a railway line.", () => Menu.MenuOptionFour(railwayLogic, sConsole))
+                      .Add("Add new Service to an existing Railway Line", () => Menu.MenuOptionFive(railwayLogic, servicesLogic, sConsole))
+                      .Add("Generate statistics", () => Menu.MenuOptionSix(railwayLogic, servicesLogic, sConsole))
+                      .Add("List of railway lines with filtering", () => Menu.MenuOptionSeven(railwayLogic, servicesLogic, sConsole))
+                      .Add("Exit", Menu.MenuOptionEight)
+                      .Configure(config => { config.Selector = "--> "; 
+                          config.WriteHeaderAction = () => Console.WriteLine(Menu.header + "\n\nPick an option:");
+                          config.WriteItemAction = item => Console.Write($"[{item.Index + 1}] {item.Name}");})
+                      .Show();
 
 
 
