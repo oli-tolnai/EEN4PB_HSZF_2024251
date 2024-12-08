@@ -42,7 +42,6 @@ namespace EEN4PB_HSZF_2024251
             
 
             var sConsole = new ConsoleMenu();
-
             sConsole.Add("Import a JSON file to database", () => Menu.MenuOptionOne(railwayLogic, sConsole))
                       .Add("Create a new Railway Line", () => Menu.MenuOptionTwo(railwayLogic, sConsole))
                       .Add("Delete an existing Railway Line", () => Menu.MenuOptionThree(railwayLogic, sConsole))
@@ -51,7 +50,7 @@ namespace EEN4PB_HSZF_2024251
                       .Add("Generate statistics", () => Menu.MenuOptionSix(railwayLogic, servicesLogic, sConsole))
                       .Add("List of railway lines with filtering", () => Menu.MenuOptionSeven(railwayLogic, servicesLogic, sConsole))
                       .Add("Exit", Menu.MenuOptionEight)
-                      .Configure(config => { config.Selector = "--> "; 
+                      .Configure(config => { config.Selector = "  "; 
                           config.WriteHeaderAction = () => Console.WriteLine(Menu.header + "\n\nPick an option:");
                           config.WriteItemAction = item => Console.Write($"[{item.Index + 1}] {item.Name}");})
                       .Show();

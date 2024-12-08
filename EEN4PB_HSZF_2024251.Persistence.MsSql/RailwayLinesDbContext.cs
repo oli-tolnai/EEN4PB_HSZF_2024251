@@ -30,7 +30,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             optionsBuilder
                 .UseLazyLoadingProxies()
                 //.UseLoggerFactory(MyLoggerFactory)
-                .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=RailwayLineDb;Trusted_Connection=True;TrustServerCertificate=True");
+                .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=RailwayLineDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;");
         }
 
         

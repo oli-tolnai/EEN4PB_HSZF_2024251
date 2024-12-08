@@ -44,7 +44,7 @@ namespace EEN4PB_HSZF_2024251
             Console.WriteLine("File found. Importing to database...");
             return path;
         }
-        
+
         /*
         public static void FirstMenu(IRailwayLinesLogic railwayLogic, IServicesLogic servicesLogic, ConsoleMenu menu)
         {
@@ -66,7 +66,7 @@ namespace EEN4PB_HSZF_2024251
             railwayLogic.FillDatabase(PathInput(menu));
             Console.WriteLine("New JSON file imported to the database");
 
-            
+
             Console.Write("\nPress Enter to return to the menu.");
             Console.ReadLine();
             menu.Show();
@@ -90,7 +90,7 @@ namespace EEN4PB_HSZF_2024251
             {
                 railwayLogic.CreateRailwayLinesConsole(inputLineName, inputLineNumber);
 
-                
+
                 Console.Write("Press Enter to return to the menu.");
                 Console.ReadLine();
                 menu.Show();
@@ -230,11 +230,14 @@ namespace EEN4PB_HSZF_2024251
             var isValidAddServiceInput = false;
             while (!isValidAddServiceInput)
             {
-                //TODO: return menu if the number is null and many things TODO here
                 Console.Write("Enter the number of the Railway Line you want to add a service to: ");
                 string userAddServiceInput = Console.ReadLine();
                 isValidAddServiceInput = int.TryParse(userAddServiceInput, out addServiceInput);
-                if (!isValidAddServiceInput)
+                if (userAddServiceInput == "")
+                {
+                    break;
+                }
+                else if (!isValidAddServiceInput)
                 {
                     Console.WriteLine("Invalid input. Please enter a number.");
                 }
@@ -249,7 +252,6 @@ namespace EEN4PB_HSZF_2024251
                     Console.Write("Number: " + allrailwayLines.ToList()[addServiceInput - 1].LineNumber);
                     Console.WriteLine("\tName: " + allrailwayLines.ToList()[addServiceInput - 1].LineName);
 
-                    //TODO: if give nothing return to the menu + intparse -> tryparse
                     Console.Write("From: ");
                     string inputFrom = Console.ReadLine();
                     Console.Write("To: ");
@@ -287,31 +289,77 @@ namespace EEN4PB_HSZF_2024251
             menu.Show();
         }
 
-        //TODO: statistics
         //MenuOptionSix: Generate Statistics
         public static void MenuOptionSix(IRailwayLinesLogic railwayLogic, IServicesLogic servicesLogic, ConsoleMenu menu)
         {
             Console.Clear();
             Console.WriteLine(header);
 
-            Console.WriteLine("Statistics");
-            Console.WriteLine("==========\n");
+            Console.WriteLine("Statistics\n==========\n\nTrains with Delays Under 5 Minutes by Line:");
+            railwayLogic.ServicesLessThan5().ForEach(s => Console.WriteLine(s));
+            Console.WriteLine("\n\nAverage Delays by Line:");
+            railwayLogic.AverageDelays().ForEach(a => Console.WriteLine(a));
+            Console.WriteLine("\n\nThe most delayed destinations per railway line:");
+            railwayLogic.MostDelayedDestinations().ForEach(m => Console.WriteLine(m));
 
-            var allRailwayLines = railwayLogic.GetAllRailwayLines();
-            var allServices = servicesLogic.GetAllServices();
-
-            Console.WriteLine("Number of Railway Lines: " + allRailwayLines.Count());
-            Console.WriteLine("Number of Services: " + allServices.Count());
-            Console.WriteLine("Average number of services per Railway Line: " + allServices.Count() / allRailwayLines.Count());
-            Console.WriteLine("Average delay amount: " + allServices.Average(x => x.DelayAmount) + " minutes");
-            
-
+            //path where to save this into a file
+            Console.WriteLine("Do you want to save the statistics into a file? (y/n)");
+            var saveToFile = Console.ReadLine();
+            if (saveToFile == "y")
+            {
+                Console.WriteLine("Use default path or custom? (d/c)");
+                var choice = Console.ReadLine();
+                if (choice == "d")
+                {
+                    var defaultPath = "statistics.txt";
+                    File.WriteAllText(defaultPath, "Statistics:\n");
+                    railwayLogic.ServicesLessThan5().ForEach(s => File.AppendAllText(defaultPath, s));
+                    Console.WriteLine("Statistics saved to file.");
+                }
+                else if (choice == "c")
+                {
+                    Console.WriteLine("Please enter the path where you want to save the statistics:");
+                    var path = Console.ReadLine();
+                    if (path == "")
+                    {
+                        Console.WriteLine("You did not specify a file.");
+                        Console.Write("Press Enter to return to the menu.");
+                        Console.ReadLine();
+                        menu.Show();
+                    }
+                    else if (!path.EndsWith(".txt"))
+                    {
+                        Console.WriteLine("Invalid file format.");
+                        Console.Write("Press Enter to return to the menu.");
+                        Console.ReadLine();
+                        menu.Show();
+                    }
+                    else if (!Directory.Exists(Path.GetDirectoryName(path)))
+                    {
+                        //Directory.CreateDirectory(Path.GetDirectoryName(path));
+                        Console.WriteLine("Invalid path.");
+                        Console.Write("Press Enter to return to the menu.");
+                        Console.ReadLine();
+                        menu.Show();
+                    }
+                    else
+                    {
+                        File.WriteAllText(path, "Trains with Delays Under 5 Minutes by Line:\n");
+                        railwayLogic.ServicesLessThan5().ForEach(s => File.AppendAllText(path, s));
+                        File.AppendAllText(path, "\n\nAverage Delays by Line:\n");
+                        railwayLogic.AverageDelays().ForEach(a => File.AppendAllText(path, a));
+                        File.AppendAllText(path, "\n\nThe most delayed destinations per railway line:\n");
+                        railwayLogic.MostDelayedDestinations().ForEach(m => File.AppendAllText(path, m));
+                        Console.WriteLine("Statistics saved to file.");
+                    }
+                }
+            }
             Console.Write("\nPress Enter to return to the menu.");
             Console.ReadLine();
             menu.Show();
         }
 
-        //TODO: Filtering
+        
         //MenuOptionSeven: List of railway lines with filtering
         public static void MenuOptionSeven(IRailwayLinesLogic railwayLogic, IServicesLogic servicesLogic, ConsoleMenu menu)
         {
@@ -331,8 +379,8 @@ namespace EEN4PB_HSZF_2024251
             Console.WriteLine("Goodbye!");
             Environment.Exit(0);
         }
-        
-        
+
+
         /*MainMenu
         public static void MainMenu(IRailwayLinesLogic railwayLogic, IServicesLogic servicesLogic)
         {
