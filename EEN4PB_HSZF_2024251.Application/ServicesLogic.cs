@@ -1,5 +1,6 @@
 ﻿using EEN4PB_HSZF_2024251.Model;
 using EEN4PB_HSZF_2024251.Persistence.MsSql;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,11 +34,14 @@ namespace EEN4PB_HSZF_2024251.Application
         public void ConsoleCreateAndAddService(RailwayLine railwayline, string from, string to, int trainNumber, int delayAmount, string trainType)
         {
             // Check if the new service has the lowest delayAmount among the other services in the same railwayline
-            var lowestDelayAmount = provider.GetAll()
+            int lowestDelayAmount = -1;
+            if (!provider.GetAll().ToList().IsNullOrEmpty())
+            {
+                lowestDelayAmount = provider.GetAll()
                 .Where(s => s.RailwayLineId == railwayline.Id)
                 .Min(s => s.DelayAmount);
-            
-            if (delayAmount < lowestDelayAmount)
+            }
+            if (delayAmount < lowestDelayAmount || lowestDelayAmount == -1)
             {
                 LowestDelayEventHandler?.Invoke();
             }

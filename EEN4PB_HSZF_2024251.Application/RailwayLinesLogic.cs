@@ -5,11 +5,6 @@ namespace EEN4PB_HSZF_2024251.Application
 {
     public interface IRailwayLinesLogic
     {
-        /*
-        RailwayLine GetRailwayLineById(string id);
-
-        List<RailwayLine> GetRailwayLines();*/
-
         public void CreateRailwayLine(RailwayLine railwayLine);
 
         public void DeleteRailwayLine(string id);
@@ -188,8 +183,6 @@ namespace EEN4PB_HSZF_2024251.Application
                 }
             }
             return mostDelayedDestinations;
-
-
         }
     
         

@@ -11,20 +11,6 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 {
     public interface IRailwayLinesDataProvider
     {
-        /*
-        RailwayLine GetRailwayLineById(string id);
-        
-        List<RailwayLine> GetRailwayLines();
-
-        //RailwayLine CRUD operations
-        
-
-        IEnumerable<RailwayLine> ReadAllRailwayLines();
-
-        void UpdateRailwayLine(RailwayLine railwayLine);
-
-        void DeleteRailwayLine(string id);*/
-
         public void CreateRailwayLine(RailwayLine railwayLine);
 
         public RailwayLine FindById(string id);
@@ -50,7 +36,6 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             this.ctx = ctx;
         }
 
-        //CRUD operations: Create, Read, Update and Delete RailwayLine
         public void CreateRailwayLine(RailwayLine railwayLine)
         {
             ctx.Set<RailwayLine>().Add(railwayLine);
@@ -79,38 +64,7 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
         {
             return ctx.Set<RailwayLine>();
         }
-
-        /*public void Update(RailwayLine railwayLine)
-        {
-            var old = FindById(railwayLine.Id);
-
-            foreach (var prop in typeof(RailwayLine).GetProperties())
-            {
-                prop.SetValue(old, prop.GetValue(railwayLine));
-            }
-            ctx.Set<RailwayLine>().Update(old);
-            ctx.SaveChanges();
-        }*/
-
-        
-        /*public void FillDatabaseFirstTime(string path)
-        {
-            string jsonString = File.ReadAllText(path);
-            //Console.WriteLine(jsonString);
-
-            RailwayData railwayData = JsonConvert.DeserializeObject<RailwayData>(jsonString);
-
-            foreach (var railwayLine in railwayData!.RailwayLines)
-            {
-                ctx.RailwayLines.Add(railwayLine);
-                foreach (var service in railwayLine.Services)
-                {
-                    ctx.Services.Add(service);
-                }
-            }
-            ctx.SaveChanges();
-        }*/
-
+              
         public void FillDatabase(string path)
         {
             string jsonString = File.ReadAllText(path);

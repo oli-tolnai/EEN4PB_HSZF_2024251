@@ -31,7 +31,6 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
 
         public IQueryable<Service> GetAll();
 
-        //create service and add to a railwayline
         public void ConsoleCreateAndAddService(RailwayLine railwayline, Service service);
 
     }
@@ -68,78 +67,5 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             return ctx.Set<Service>();
         }
 
-
-
-        /*
-        public Service GetServiceById(string id)
-        {
-            return ctx.Services.FirstOrDefault(x => x.Id == id);
-        }
-
-        public List<Service> GetServices()
-        {
-            return ctx.Services.ToList();
-        }
-
-        public List<Service> GetRailwayLineServices(string lineNumber, string lineName)
-        {
-            var servicesList = new List<Service>();
-
-            foreach (var railwayLine in ctx.RailwayLines)
-            {
-                if (railwayLine.LineNumber == lineNumber && railwayLine.LineName == lineName)
-                {
-                    servicesList.AddRange(railwayLine.Services);
-                }
-            }
-
-            return servicesList;
-        }
-
-        public void CreateService(string railwayLineId, Service service)
-        {
-            service.RailwayLineId = railwayLineId;
-            ctx.Services.Add(service);
-            ctx.SaveChanges();
-
-        }
-
-        public void DeleteService(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Service> ReadAllServices()
-        {
-            return ctx.Services.ToList();
-        }
-
-        public void UpdateService(string id, Service service)
-        {
-            //update service
-            var s = GetServiceById(id);
-            if (service.From != null)
-            {
-                s.From = service.From;
-            }
-            if (service.To != null)
-            {
-                s.To = service.To;
-            }
-            if ((service.DelayAmount).GetType() == typeof(int))
-            {
-                s.DelayAmount = service.DelayAmount;
-            }
-            if (service.TrainNumber != 0)
-            {
-                s.TrainNumber = service.TrainNumber;
-            }
-            if (service.TrainType != null)
-            {
-                s.TrainType = service.TrainType;
-            }
-            ctx.SaveChanges();
-
-        }*/
     }
 }
