@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -299,8 +300,12 @@ namespace EEN4PB_HSZF_2024251
                 if (choice == "d")
                 {
                     var defaultPath = "statistics.txt";
-                    File.WriteAllText(defaultPath, "Statistics:\n");
+                    File.WriteAllText(defaultPath, "Trains with Delays Under 5 Minutes by Line:\n");
                     railwayLogic.ServicesLessThan5().ForEach(s => File.AppendAllText(defaultPath, s));
+                    File.AppendAllText(defaultPath, "\n\nAverage Delays by Line:\n");
+                    railwayLogic.AverageDelays().ForEach(a => File.AppendAllText(defaultPath, a));
+                    File.AppendAllText(defaultPath, "\n\nThe most delayed destinations per railway line:\n");
+                    railwayLogic.MostDelayedDestinations().ForEach(m => File.AppendAllText(defaultPath, m));
                     Console.WriteLine("Statistics saved to file.");
                 }
                 else if (choice == "c")
