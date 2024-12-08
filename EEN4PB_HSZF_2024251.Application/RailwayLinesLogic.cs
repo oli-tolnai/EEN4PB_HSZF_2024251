@@ -31,11 +31,18 @@ namespace EEN4PB_HSZF_2024251.Application
         public List<string> AverageDelays();
 
         public List<string> MostDelayedDestinations();
+ 
+        public event Action RailwayLineCreatedEventHandler;
+        public event Action AlreadyInUseEventHandler;
     }
 
+    
     public class RailwayLinesLogic : IRailwayLinesLogic
     {
         private readonly IRailwayLinesDataProvider provider;
+        
+        public event Action RailwayLineCreatedEventHandler;
+        public event Action AlreadyInUseEventHandler;
 
         public RailwayLinesLogic(IRailwayLinesDataProvider railwayLinesDataProvider)
         {
@@ -62,19 +69,18 @@ namespace EEN4PB_HSZF_2024251.Application
         {
             provider.FillDatabase(path);
         }
-
+        
         public void CreateRailwayLinesConsole(string lineName, string lineNumber)
         {
-            //TODO: NO CW IN LOGIC
             var newRailwayLine = new RailwayLine { LineName = lineName, LineNumber = lineNumber };
             if (!AlreadyExists(newRailwayLine))
             {
                 provider.CreateRailwayLine(newRailwayLine);
-                Console.WriteLine("New railway line created");
+                RailwayLineCreatedEventHandler?.Invoke();
             }
             else
             {
-                System.Console.WriteLine("ERROR! One or two of the values specified are already in use.");
+                AlreadyInUseEventHandler?.Invoke();
             }
         }
 

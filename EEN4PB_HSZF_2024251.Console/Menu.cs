@@ -90,7 +90,6 @@ namespace EEN4PB_HSZF_2024251
             {
                 railwayLogic.CreateRailwayLinesConsole(inputLineName, inputLineNumber);
 
-
                 Console.Write("Press Enter to return to the menu.");
                 Console.ReadLine();
                 menu.Show();
@@ -279,8 +278,8 @@ namespace EEN4PB_HSZF_2024251
                     }
                     int inputDelayAmountInt = int.Parse(inputDelayAmount);
                     int inputTrainNumberInt = int.Parse(inputTrainNumber);
-                    servicesLogic.ConsoleCreateAndAddService(allrailwayLines.ToList()[addServiceInput - 1], inputFrom, inputTo, inputTrainNumberInt, inputDelayAmountInt, inputTrainType);
                     Console.WriteLine("Service added to Railway Line");
+                    servicesLogic.ConsoleCreateAndAddService(allrailwayLines.ToList()[addServiceInput - 1], inputFrom, inputTo, inputTrainNumberInt, inputDelayAmountInt, inputTrainType);
                     isValidAddServiceInput = true;
                 }
             }
