@@ -158,7 +158,7 @@ namespace EEN4PB_HSZF_2024251.Application
                         $"\n\t\tTrain Number: {leastDelayed.TrainNumber}" +
                         $"\n\t\tDelay: {leastDelayed.DelayAmount} minutes" +
                         $"\n\t\tTrain Type: {leastDelayed.TrainType}" +
-                        $"\n\tMost delayed service: {mostDelayed.From}" +
+                        $"\n\tMost delayed service:" +
                         $"\n\t\tFrom: {mostDelayed.From}" +
                         $"\n\t\tTo: {mostDelayed.To}" +
                         $"\n\t\tTrain Number: {mostDelayed.TrainNumber}" +

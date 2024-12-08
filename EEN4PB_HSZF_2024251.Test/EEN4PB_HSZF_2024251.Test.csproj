@@ -7,6 +7,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+		<PackageReference Include="Moq" Version="4.17.1" />
+		<PackageReference Include="NUnit" Version="3.13.2" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+		<PackageReference Include="xunit.extensibility.core" Version="2.9.2" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\EEN4PB_HSZF_2024251.Application\EEN4PB_HSZF_2024251.Application.csproj" />
 		<ProjectReference Include="..\EEN4PB_HSZF_2024251.Model\EEN4PB_HSZF_2024251.Model.csproj" />
 		<ProjectReference Include="..\EEN4PB_HSZF_2024251.Persistence.MsSql\EEN4PB_HSZF_2024251.Persistence.MsSql.csproj" />

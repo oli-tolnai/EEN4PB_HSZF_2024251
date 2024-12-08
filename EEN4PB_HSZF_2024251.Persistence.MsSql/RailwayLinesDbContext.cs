@@ -12,7 +12,6 @@ namespace EEN4PB_HSZF_2024251.Persistence.MsSql
             builder.AddConsole();
         });
 
-
         public DbSet<RailwayLine> RailwayLines { get; set; }
 
         public DbSet<Service> Services { get; set; }

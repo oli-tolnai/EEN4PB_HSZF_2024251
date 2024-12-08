@@ -358,7 +358,6 @@ namespace EEN4PB_HSZF_2024251
             menu.Show();
         }
 
-
         //MenuOptionSeven: List of railway lines with filtering
         public static void MenuOptionSeven(IRailwayLinesLogic railwayLogic, IServicesLogic servicesLogic, ConsoleMenu menu)
         {
