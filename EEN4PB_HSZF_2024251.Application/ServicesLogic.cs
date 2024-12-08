@@ -10,13 +10,17 @@ namespace EEN4PB_HSZF_2024251.Application
 {
     public interface IServicesLogic
     {
-        public void ConsoleCreateAndAddService(RailwayLine railwayline,  string from, string to, int trainNumber, int delayAmount, string trainType);
+        public void ConsoleCreateAndAddService(RailwayLine railwayline, string from, string to, int trainNumber, int delayAmount, string trainType);
 
         public IQueryable<Service> GetAllServices();
     }
 
+    
+
     public class ServicesLogic : IServicesLogic
     {
+        public event Action LowestDelayEvent;
+
         private readonly IServicesDataProvider provider;
 
         public ServicesLogic(IServicesDataProvider serviceDataProvider)
@@ -30,6 +34,15 @@ namespace EEN4PB_HSZF_2024251.Application
             newservice.RailwayLineId = railwayline.Id;
             provider.ConsoleCreateAndAddService(railwayline, newservice);
 
+            // Check if the new service has the lowest delayAmount among the other services in the same railwayline
+            var lowestDelayAmount = provider.GetAll()
+                .Where(s => s.RailwayLineId == railwayline.Id)
+                .Min(s => s.DelayAmount);
+
+            if (delayAmount < lowestDelayAmount)
+            {
+                LowestDelayEvent?.Invoke();
+            }
         }
 
         public IQueryable<Service> GetAllServices()
