@@ -35,7 +35,7 @@ namespace EEN4PB_HSZF_2024251.Application
         {
             // Check if the new service has the lowest delayAmount among the other services in the same railwayline
             int lowestDelayAmount = -1;
-            if (!provider.GetAll().ToList().IsNullOrEmpty())
+            if (!provider.GetAll().Where(s => s.RailwayLineId == railwayline.Id).ToList().IsNullOrEmpty())
             {
                 lowestDelayAmount = provider.GetAll()
                 .Where(s => s.RailwayLineId == railwayline.Id)
